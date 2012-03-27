@@ -1,7 +1,0 @@
-SetEnv APPLICATION_ENV development
-
-RewriteEngine on
-RewriteRule ^scripts  - [L]
-RewriteRule !\.(php|swf|js|ico|gif|jpg|png|css)$ index.php [L]
-
-ErrorDocument 404 /missing.php

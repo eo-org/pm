@@ -1,0 +1,20 @@
+# Eclipse files #
+######################
+.buildpath
+.project
+.settings
+# OS generated files #
+######################
+.DS_Store
+ehthumbs.db
+Icon
+Thumbs.db
+# htaccess file #
+######################
+.htaccess
+# system cache folder #
+#####################
+cache
+# library folder replaced with coded-library#
+#####################
+library
