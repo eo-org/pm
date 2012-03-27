@@ -1,5 +1,5 @@
 <?php 
-class Project_Forms_Detail_Create extends Zend_Form 
+class Pm_Forms_Detail_Create extends Zend_Form 
 { 
       public function __construct($options = null) 
       { 

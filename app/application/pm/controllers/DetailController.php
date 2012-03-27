@@ -2,15 +2,12 @@
 class Pm_DetailController extends Zend_Controller_Action
 {
 	private $_tb;
-	private $_schedule;
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
 			$this->_redirect('/pm/admin/');
 		}
 		$this->_tb = Class_Base::_('Detail');
-		require_once 'ScheduleController.php';
-		$this->_schedule = new Pm_ScheduleController($this->getRequest(), $this->getResponse(), $this->_getAllParams());
 	}
 	public function indexAction()
 	{	
