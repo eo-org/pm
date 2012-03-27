@@ -27,7 +27,7 @@ class Pm_AdminController extends Zend_Controller_Action
 				$_SESSION['USERID'] = $rowset['username'];
 				$_SESSION['USERNAME'] = $row['username'];
 				$_SESSION['PERMISSIONS'] = $rowset['permissions'];
-				$this->_hepler->redirector->gotoSimple('index');
+				$this->_helper->redirector->gotoSimple('index');
 			}
 			$this->view->errorMsg = "用户名或密码错误";
 		}

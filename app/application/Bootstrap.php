@@ -11,14 +11,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	
 	protected function _initDb()
 	{
-		$db = new Zend_Db_Adapter_Pdo_Mysql(array(
-			'host' => 'localhost',
-			'username' => 'root',
-			'password' => 'root',
-			'dbname' => 'service-pm',
-			'adapter' => 'mysqli',
-			'charset' => 'UTF8'
-		));
+//		$db = new Zend_Db_Adapter_Pdo_Mysql(array(
+//			'host' => 'localhost',
+//			'username' => 'root',
+//			'password' => 'root',
+//			'dbname' => 'service-pm',
+//			'adapter' => 'mysqli',
+//			'charset' => 'UTF8'
+//		));
+//		
+		$db = $this->getPluginResource('db')->getDbAdapter();
+        $db->query("SET NAMES 'utf8'");
+		
 		Zend_Registry::set('db', $db);
 		Zend_Db_Table::setDefaultAdapter($db);
 	}
