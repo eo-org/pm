@@ -33,7 +33,7 @@ $('#seldetail .detail').click(function(){
 	$("#detail #seldetail #"+did).attr('class','font');
 	$.ajax({
 		type: "GET",
-		url: '/project/users/selstep/did/'+did+'/uid/<?php echo $this->uid;?>',
+		url: '/pm/users/selstep/did/'+did+'/uid/<?php echo $this->uid;?>',
 		success: function(obj) {
 			$('#step #selstep').html(obj);
 		}

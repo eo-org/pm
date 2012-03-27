@@ -6,7 +6,7 @@ class Pm_IndividualController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/project/admin/');
+			$this->_redirect('/pm/admin/');
 		}
 		$this->_Digits = new Zend_Filter_Digits();
 	}
@@ -28,9 +28,9 @@ class Pm_IndividualController extends Zend_Controller_Action
 		$this->view->sid = $sid;
 		$this->view->rowset = $rowset;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '未完成任务', 'href' => '/project/individual/index/sid/0', 'method' => 'ManagementDetail'),
-				array('label' => '完成任务', 'href' => '/project/individual/index/sid/1', 'method' => 'ManagementDetail'),
-				array('label' => '个人信息', 'href' => '/project/individual/sel/', 'method' => 'CreateDetail')));
+				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
 	}
 	
 	public function selAction()
@@ -52,9 +52,9 @@ class Pm_IndividualController extends Zend_Controller_Action
 		$this->view->row = $row;
 		$this->view->rowset = $rowstep;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '未完成任务', 'href' => '/project/individual/index/sid/0', 'method' => 'ManagementDetail'),
-				array('label' => '完成任务', 'href' => '/project/individual/index/sid/1', 'method' => 'ManagementDetail'),
-				array('label' => '个人信息', 'href' => '/project/individual/sel/', 'method' => 'CreateDetail')));
+				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
 	}
 	
 	public function getFormJsonAction()
@@ -105,7 +105,7 @@ class Pm_IndividualController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/individual/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/individual/Edit.php';
 		$form = new Form_Individual_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$tb = Class_Base::_('Step');
@@ -114,7 +114,7 @@ class Pm_IndividualController extends Zend_Controller_Action
 		if($this->getRequest()->isPost() && $html->isValid($this->getRequest()->getParams()) ) {
         	$row->setFromArray($html->getValues());
 			$row->save();
-			$this->_redirect('/project/individual/index/');
+			$this->_redirect('/pm/individual/index/');
 		}
 		$this->view->html = $html;
 	}

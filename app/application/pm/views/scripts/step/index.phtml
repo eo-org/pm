@@ -21,8 +21,8 @@
   	<td><?php echo $this->detailrow['paid'];?></td>
   	<td><?php echo $this->detailrow['testurl'];?></td>
   	<td><?php echo $this->detailrow['state'];?></td>
-  	<td><a href='/project/detail/edit/id/<?php echo $this->detailrow['id'];?>'>编辑</a>
-  	&nbsp;&nbsp;<a href='/project/detail/del/id/<?php echo $this->detailrow['id'];?>'>删除</a></td>
+  	<td><a href='/pm/detail/edit/id/<?php echo $this->detailrow['id'];?>'>编辑</a>
+  	&nbsp;&nbsp;<a href='/pm/detail/del/id/<?php echo $this->detailrow['id'];?>'>删除</a></td>
   </tr>
   <tr align="center"><td height="30" colspan="9"></td></tr>
   <tr align="center" valign="middle">
@@ -52,9 +52,9 @@
     <td><?php echo $arrone['endtime']?></td>
     <td><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
     <td><?php echo $arrone['assess']?></td>
-    <td><a href='/project/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
-    &nbsp;<a href='/project/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
-    &nbsp;<a href='/project/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a></td>
+    <td><a href='/pm/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
+    &nbsp;<a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
+    &nbsp;<a href='/pm/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a></td>
   </tr>
   <?php }}?>
   </table>
@@ -99,7 +99,7 @@ $('#submitstep').click(function(){
 	var id = $("#detailid").val();
 	var aj = $.ajax({
 		type: "POST",
-		url: '/project/step/create/id/'+id+'/val/'+attrValue+'/selval/'+selvalue,
+		url: '/pm/step/create/id/'+id+'/val/'+attrValue+'/selval/'+selvalue,
 		success: function(obj) {	
 				
 		}

@@ -6,7 +6,7 @@ class Pm_UsersController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/project/admin/');
+			$this->_redirect('/pm/admin/');
 		}
 		$this->_tb = Class_Base::_('Users_Information');
 	}
@@ -21,14 +21,14 @@ class Pm_UsersController extends Zend_Controller_Action
 		$this->uid = $row[0]['id'];
 		$this->view->seldetail = $this->seldetailAction();
 		$this->_helper->template->actionMenu(array(
-				array('label' => '员工详情管理', 'href' => '/project/users/index/', 'method' => 'ManagementDetail'),
-				array('label' => '员工添加', 'href' => '/project/users/create/', 'method' => 'CreateDetail')));
+				array('label' => '员工详情管理', 'href' => '/pm/users/index/', 'method' => 'ManagementDetail'),
+				array('label' => '员工添加', 'href' => '/pm/users/create/', 'method' => 'CreateDetail')));
 	}
 	
 	public function createAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/users/Edit.php';
-		require CONTAINER_PATH.'/app/application/project/forms/users/User.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/users/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/users/User.php';
 		$form = new Form_Users_Edit();
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 			$arr = $form->getValues();
@@ -55,7 +55,7 @@ class Pm_UsersController extends Zend_Controller_Action
 					);
 			$tb_users = Class_Base::_('Users');
 			$tb_users->insert($arrthree);
-			$this->_redirect('/project/users/index/');
+			$this->_redirect('/pm/users/index/');
 		}
 		$this->view->html = $form;
 	}
@@ -126,8 +126,8 @@ class Pm_UsersController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/users/Edit.php';
-		require CONTAINER_PATH.'/app/application/project/forms/users/User.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/users/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/users/User.php';
 		$form = new Form_Users_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current();
@@ -165,14 +165,14 @@ class Pm_UsersController extends Zend_Controller_Action
 			$tb_users = Class_Base::_('Users');
 			$where = 'username = '.$id;
 			$tb_users->update($arrthree, $where);
-			$this->_redirect('/project/users/index/');
+			$this->_redirect('/pm/users/index/');
 		}
 		$this->view->html = $html;
 	}
 	
 	public function selusernameAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/users/User.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/users/User.php';
 		$User = new Form_Users_User();
 		$uname = $this->getRequest()->getParam('uname');
 		$loginname =  strtolower($User->getInitials($uname));
@@ -213,6 +213,6 @@ class Pm_UsersController extends Zend_Controller_Action
 		$where = 'username = '.$id;
 		$tb = Class_Base::_('Users');
 		$tb->delete($where);
-		$this->_redirect('/project/users/index/');
+		$this->_redirect('/pm/users/index/');
 	}
 }

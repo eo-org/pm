@@ -104,9 +104,9 @@ $(document).ready(function() {
 		if(skillid.length==""){alert('部门不能为空！'); }   
 		$.ajax({
 			type: "POST",
-			url: '/project/individual/edituser/username/'+username+'/sex/'+sex+'/age/'+age+'/QQ/'+QQ+'/phone/'+phone+'/skillid/'+skillid,
+			url: '/pm/individual/edituser/username/'+username+'/sex/'+sex+'/age/'+age+'/QQ/'+QQ+'/phone/'+phone+'/skillid/'+skillid,
 			success: function(obj) {
-				window.location.href='/project/individual/sel/';			
+				window.location.href='/pm/individual/sel/';			
 			}
 		});
 		

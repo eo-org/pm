@@ -5,7 +5,7 @@ class Pm_FeedbackController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/project/admin/');
+			$this->_redirect('/pm/admin/');
 		}
 		$this->_tb = Class_Base::_('Feedback');
 	}
@@ -20,9 +20,9 @@ class Pm_FeedbackController extends Zend_Controller_Action
 		$row = $this->_tb->fetchAll($selector)->toArray();
 		$this->_helper->template->head('客户反馈意见详情列表');
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目步骤', 'href' => '/project/step/index/id/'.$id, 'method' => 'detailstep'),
-				array('label' => '反馈意见', 'href' => '/project/feedback/index/id/'.$id, 'method' => 'feedback'),
-				array('label' => '反馈意见添加', 'href' => '/project/feedback/create/id/'.$id, 'method' => 'Createfeedback')));
+				array('label' => '项目步骤', 'href' => '/pm/step/index/id/'.$id, 'method' => 'detailstep'),
+				array('label' => '反馈意见', 'href' => '/pm/feedback/index/id/'.$id, 'method' => 'feedback'),
+				array('label' => '反馈意见添加', 'href' => '/pm/feedback/create/id/'.$id, 'method' => 'Createfeedback')));
 		if(!empty($row)){
 			$this->view->projectname = $row[0]['projectname'];
 			$this->view->deid = $row[0]['deid'];
@@ -42,7 +42,7 @@ class Pm_FeedbackController extends Zend_Controller_Action
 					'proposal' => $proposal
 			);
 			$this->_tb->insert($arrin);
-			$this->_redirect('/project/feedback/index/id/'.$id);
+			$this->_redirect('/pm/feedback/index/id/'.$id);
 		}
 		$this->view->id=$id;
 	}
@@ -61,7 +61,7 @@ class Pm_FeedbackController extends Zend_Controller_Action
 	    			);
 	    	$where = 'id = '.$id;
 	    	$this->_tb->update($arrup, $where);
-	    	$this->_redirect('/project/feedback/index/id/'.$row['detailid']);
+	    	$this->_redirect('/pm/feedback/index/id/'.$row['detailid']);
 		}
 		$this->view->id= $id;
 		$this->view->row = $row;	
@@ -73,6 +73,6 @@ class Pm_FeedbackController extends Zend_Controller_Action
 		$id = $this->getRequest()->getParam('id');
 		$where = 'id = '.$id;
 		$row = $this->_tb->delete($where);
-		$this->_redirect('/project/feedback/index/id/'.$deid);
+		$this->_redirect('/pm/feedback/index/id/'.$deid);
 	}
 }

@@ -13,7 +13,7 @@ $(document).ready(function() {
 		}else{
 			$.ajax({
 				type: "POST",
-				url: '/project/users/selusername/uname/'+uname,
+				url: '/pm/users/selusername/uname/'+uname,
 				success: function(obj) {	
 					$("#username-element #nametsy").html(unescape(obj));				
 				}

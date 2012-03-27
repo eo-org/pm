@@ -6,11 +6,11 @@ class Pm_DetailController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/project/admin/');
+			$this->_redirect('/pm/admin/');
 		}
 		$this->_tb = Class_Base::_('Detail');
 		require_once 'ScheduleController.php';
-		$this->_schedule = new Project_ScheduleController($this->getRequest(), $this->getResponse(), $this->_getAllParams());
+		$this->_schedule = new Pm_ScheduleController($this->getRequest(), $this->getResponse(), $this->_getAllParams());
 	}
 	public function indexAction()
 	{	
@@ -24,9 +24,9 @@ class Pm_DetailController extends Zend_Controller_Action
 		}
 		$id = $this->getRequest()->getParam('id');
 		if(empty($id)){
-			$pathurl = "/project/detail/get-form-json/";
+			$pathurl = "/pm/detail/get-form-json/";
 		}else{
-			$pathurl = '/project/detail/get-form-json/id/'.$id;
+			$pathurl = '/pm/detail/get-form-json/id/'.$id;
 		}
 		$this->_helper->template->head('项目详情列表');
 		$hashParam = $this->getRequest()->getParam('hashParam');
@@ -52,7 +52,7 @@ class Pm_DetailController extends Zend_Controller_Action
 				'click' => array(
 						'action' => 'contextMenu',
 						'menuItems' => array(
-								array('详情','/project/step/index/id/')
+								array('详情','/pm/step/index/id/')
 						)
 				),
 				'initSelectRun' => 'true',
@@ -61,13 +61,13 @@ class Pm_DetailController extends Zend_Controller_Action
 		$this->view->type = $type;
 		$this->view->partialHTML = $partialHTML;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目管理', 'href' => '/project/detail/index/', 'method' => 'ManagementDetail'),
-				array('label' => '项目添加', 'href' => '/project/detail/create/', 'method' => 'CreateDetail')));
+				array('label' => '项目管理', 'href' => '/pm/detail/index/', 'method' => 'ManagementDetail'),
+				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail')));
 	}
 	
 	public function createAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/detail/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/detail/Edit.php';
 		$form = new Form_Detail_Edit();
 		$tb = Class_Base::_('Typestep');
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
@@ -86,7 +86,7 @@ class Pm_DetailController extends Zend_Controller_Action
 				$step = Class_Base::_('Step');
 				$step->insert($arrin);
 			}
-			$this->_redirect('/project/detail/index/');
+			$this->_redirect('/pm/detail/index/');
 		}
 		$this->view->html = $form;
 	}
@@ -164,7 +164,7 @@ class Pm_DetailController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/detail/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/detail/Edit.php';
 		$form = new Form_Detail_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current();
@@ -172,11 +172,11 @@ class Pm_DetailController extends Zend_Controller_Action
 		if($this->getRequest()->isPost() && $html->isValid($this->getRequest()->getParams()) ) {
         	$row->setFromArray($html->getValues());
 			$row->save();
-			$this->_redirect('/project/detail/index/');
+			$this->_redirect('/pm/detail/index/');
 		}
 		$this->view->html = $html;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目删除', 'href' => '/project/detail/del/id/'.$id, 'method' => 'DelDetail')));
+				array('label' => '项目删除', 'href' => '/pm/detail/del/id/'.$id, 'method' => 'DelDetail')));
 	}
 	
 	public function delAction()
@@ -187,6 +187,6 @@ class Pm_DetailController extends Zend_Controller_Action
 		$schedule = Class_Base::_('Step');
 		$where = 'detailid = '.$id;
 		$schedule->delete($where);
-		$this->_redirect('/project/detail/index/');
+		$this->_redirect('/pm/detail/index/');
 	}
 }

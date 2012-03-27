@@ -5,7 +5,7 @@ class Pm_ScheduleController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/project/admin/');
+			$this->_redirect('/pm/admin/');
 		}
 		$this->_tb = Class_Base::_('Schedule');
 	}
@@ -28,14 +28,14 @@ class Pm_ScheduleController extends Zend_Controller_Action
 						'id' => null,
 						'desc' => null
 				),
-				'url' => '/project/schedule/get-form-json/id/'.$id.'/',
+				'url' => '/pm/schedule/get-form-json/id/'.$id.'/',
 				'actionId' => 'id',
 				'click' => array(
 						'action' => 'contextMenu',
 						'menuItems' => array(
-								array('分发任务', '/project/schedule/distribution/id/'),
-								array('编辑', '/project/schedule/edit/id/'),
-								array('删除', '/project/schedule/del/deid/'.$id.'/id/')
+								array('分发任务', '/pm/schedule/distribution/id/'),
+								array('编辑', '/pm/schedule/edit/id/'),
+								array('删除', '/pm/schedule/del/deid/'.$id.'/id/')
 						)
 				),
 				'initSelectRun' => 'true',
@@ -44,21 +44,21 @@ class Pm_ScheduleController extends Zend_Controller_Action
 		
 		$this->view->partialHTML = $partialHTML;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目详情管理', 'href' => '/project/detail/index/', 'method' => 'ManagementDetail'),
-				array('label' => '项目添加', 'href' => '/project/detail/create/', 'method' => 'CreateDetail'),
-				array('label' => '项目类型管理', 'href' => '/project/type/index/', 'method' => 'ManagementType'),
-				array('label' => '类型添加', 'href' => '/project/type/create/', 'method' => 'CreateType')));
+				array('label' => '项目详情管理', 'href' => '/pm/detail/index/', 'method' => 'ManagementDetail'),
+				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail'),
+				array('label' => '项目类型管理', 'href' => '/pm/type/index/', 'method' => 'ManagementType'),
+				array('label' => '类型添加', 'href' => '/pm/type/create/', 'method' => 'CreateType')));
 // 		$this->_helper->template->actionMenu(array(
 // 				array('label' => '创建新项目', 'href' => '/project/detail/create/', 'method' => 'createElementSetting')));
 	}
 	
 	public function createAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/detail/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/detail/Edit.php';
 		$form = new Form_Detail_Edit();
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 			$this->_tb->insert($form->getValues());
-			$this->_redirect('/project/detail/index/');
+			$this->_redirect('/pm/detail/index/');
 		}
 		$this->view->html = $form;
 	}
@@ -116,7 +116,7 @@ class Pm_ScheduleController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/schedule/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/schedule/Edit.php';
 		$form = new Form_Schedule_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current();
@@ -125,7 +125,7 @@ class Pm_ScheduleController extends Zend_Controller_Action
 		if($this->getRequest()->isPost() && $html->isValid($this->getRequest()->getParams()) ) {
 	        $row->setFromArray($html->getValues());
 			$row->save();
-			$this->_redirect('/project/schedule/index/id/'.$arrrow['detailid']);
+			$this->_redirect('/pm/schedule/index/id/'.$arrrow['detailid']);
 		}
 		$this->view->html = $html;
 	}
@@ -142,6 +142,6 @@ class Pm_ScheduleController extends Zend_Controller_Action
 					'assess' => ''
 				);
 		$row = $this->_tb->update($arr, $where);
-		$this->_redirect('/project/schedule/index/id/'.$deid);
+		$this->_redirect('/pm/schedule/index/id/'.$deid);
 	}
 }

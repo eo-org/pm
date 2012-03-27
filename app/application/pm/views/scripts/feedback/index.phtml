@@ -16,8 +16,8 @@
     <td height="32"><?php echo $arrone['datetime']?></td>
     <td><?php echo $arrone['pathurl'];?></td>
     <td><?php echo $arrone['proposal'];?></td>
-    <td><a id="editfeedback" href="/project/feedback/edit/id/<?php echo $arrone['id'];?>">修改</a>
-    &nbsp;&nbsp;<a id="editfeedback" href="/project/feedback/del/deid/<?php echo $arrone['detailid'];?>/id/<?php echo $arrone['id'];?>">删除</a></td>
+    <td><a id="editfeedback" href="/pm/feedback/edit/id/<?php echo $arrone['id'];?>">修改</a>
+    &nbsp;&nbsp;<a id="editfeedback" href="/pm/feedback/del/deid/<?php echo $arrone['detailid'];?>/id/<?php echo $arrone['id'];?>">删除</a></td>
   </tr>
   <?php }}?>
   <tr>
@@ -27,9 +27,3 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-<script type="text/javascript">
-$("#editfeedback").click(function(){
-	//var id = $(this).attr("name");
-	//alert(id);
-});
-</script>

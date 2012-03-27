@@ -13,7 +13,7 @@
   </tr>
   <?php foreach ($this->rowset as $num => $arrone){?>
   <tr align="center">
-  	<td height="53"><a href='/project/detail/index/id/<?php echo $arrone['detailid'];?>/'><?php echo $arrone['projectname']?></a></td>
+  	<td height="53"><a href='/pm/detail/index/id/<?php echo $arrone['detailid'];?>/'><?php echo $arrone['projectname']?></a></td>
     <td><?php echo $arrone['content']?></td>
     <td><?php echo $_SESSION['USERNAME']?></td>
     <td><?php echo $arrone['percentage']?></td>
@@ -27,7 +27,7 @@
     <td><?php echo $arrone['endtime']?></td>
     <td><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
     <td><?php echo $arrone['assess']?></td>
-    <td><?php if($this->sid == 0){ ?><a href='/project/individual/edit/id/<?php echo $arrone['id'];?>'>编辑</a><?php }?></td>
+    <td><?php if($this->sid == 0){ ?><a href='/pm/individual/edit/id/<?php echo $arrone['id'];?>'>编辑</a><?php }?></td>
   </tr>
   <?php }?>
   <tr align="center">

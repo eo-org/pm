@@ -27,12 +27,12 @@ $('#button').click(function(){
 		attrValue+= value + ':';
 	});
 	var id = $("#detailid").val();
-	purl = '/project/detail/add/id/'+id+'/val/'+attrValue;
+	purl = '/pm/detail/add/id/'+id+'/val/'+attrValue;
 	var aj = $.ajax({
 		type: "POST",
 		url: purl,
 		success: function(obj) {
-			window.location.href='/project/step/index/id/'+id;			
+			window.location.href='/pm/step/index/id/'+id;			
 		}
 	});
 });

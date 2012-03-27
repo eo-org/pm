@@ -5,7 +5,7 @@ class Pm_StepController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/project/admin/');
+			$this->_redirect('/pm/admin/');
 		}
 		$this->_tb = Class_Base::_('Step');
 	}
@@ -35,15 +35,15 @@ class Pm_StepController extends Zend_Controller_Action
 		$this->view->deid = $id;
 		$this->_helper->template->head('项目步骤详情列表');
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目详情管理', 'href' => '/project/detail/index/', 'method' => 'ManagementDetail'),
-				array('label' => '项目添加', 'href' => '/project/detail/create/', 'method' => 'CreateDetail'),
-				array('label' => '反馈意见', 'href' => '/project/feedback/index/id/'.$id, 'method' => 'CreateDetail')));
+				array('label' => '项目详情管理', 'href' => '/pm/detail/index/', 'method' => 'ManagementDetail'),
+				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail'),
+				array('label' => '反馈意见', 'href' => '/pm/feedback/index/id/'.$id, 'method' => 'CreateDetail')));
 	}
 	
 	public function distributionAction()
 	{
 		$id = $this->getRequest()->getParam('id');
-		require CONTAINER_PATH.'/app/application/project/forms/step/Distribution.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/step/Distribution.php';
 		$form = new Form_Step_Distribution($id);
 		$row = $this->_tb->find($id)->current();
 		$arrrow = $row->toArray();
@@ -52,7 +52,7 @@ class Pm_StepController extends Zend_Controller_Action
 			$arrone = $form->getValues();
 			$where = "id = ".$id;
 			$this->_tb->update($arrone, $where);
-			$this->_redirect('/project/step/index/id/'.$arrrow['detailid']);
+			$this->_redirect('/pm/step/index/id/'.$arrrow['detailid']);
 		}
 		$this->view->form = $form;
 	}
@@ -81,7 +81,7 @@ class Pm_StepController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/project/forms/step/Edit.php';
+		require CONTAINER_PATH.'/app/application/pm/forms/step/Edit.php';
 		$form = new Form_Step_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$deid = $this->getRequest()->getParam('deid');
@@ -92,7 +92,7 @@ class Pm_StepController extends Zend_Controller_Action
 	        $arrone = $form->getValues();
 	        $where = "id = ".$id;
 	        $this->_tb->update($arrone, $where);
-	        $this->_redirect('/project/step/index/id/'.$deid);
+	        $this->_redirect('/pm/step/index/id/'.$deid);
 		}
 		$this->view->html = $html;
 	}
@@ -103,6 +103,6 @@ class Pm_StepController extends Zend_Controller_Action
 		$id = $this->getRequest()->getParam('id');
 		$where = 'id = '.$id;
 		$row = $this->_tb->delete($where);
-		$this->_redirect('/project/step/index/id/'.$deid);
+		$this->_redirect('/pm/step/index/id/'.$deid);
 	}
 }
