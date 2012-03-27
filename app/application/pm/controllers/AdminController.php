@@ -1,5 +1,5 @@
 <?php
-require CONTAINER_PATH.'/app/application/pm/forms/admin/index.php';
+require CONTAINER_PATH.'/app/application/pm/forms/Admin/Index.php';
 class Pm_AdminController extends Zend_Controller_Action
 {
 	public function init()
