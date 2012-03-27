@@ -1,0 +1,32 @@
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>员工信息添加表</div><br>
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#remarks').attr("cols","25");
+	$('#remarks').attr("rows","3");
+	$("#username-element #username").after("<div id='nametsy' style='color:#f00;float:left;width:260px;'></div>");
+	$('#username-element #username').blur(function(){
+		var uname = $(this).val();
+		if(uname==""){
+			var aa = "员工姓名不能为空。";
+			$("#username-element #nametsy").html(unescape(aa));
+		}else{
+			$.ajax({
+				type: "POST",
+				url: '/project/users/selusername/uname/'+uname,
+				success: function(obj) {	
+					$("#username-element #nametsy").html(unescape(obj));				
+				}
+			});
+		}
+	});
+	$('#username-element #loginname').live("blur",function(){
+		var readonly = $(this).attr('readonly');
+		if(readonly != "readonly"){
+			alert(1);
+		}	
+	});
+});
+</script>
+ <?php echo $this->html;?>
+ 

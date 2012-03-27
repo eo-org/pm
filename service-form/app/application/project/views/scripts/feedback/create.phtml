@@ -1,0 +1,41 @@
+<form action="/project/feedback/create/id/<?php echo $this->id;?>" method="post" id="editfeedback">
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" style="font-size:16px;">
+  <tr>
+    <td height="32" colspan="4">
+    	<div id='title'>福网互联科技有限公司</div><br>
+		<div id='table'>项目<font color="#f00"><?php echo $this->projectname;?></font>客户反馈意见添加页</div><br></td>
+  </tr>
+    <tr>
+    <td height="32" align="right" width="45%">时间：</td>
+    <td><input type="text" name="datetime" id="datetime" onFocus="WdatePicker({lang:'zh-tw'})" /></td>
+  </tr>
+  <tr>
+    <td height="32" align="right"  valign="top" style="vertical-align:top;" >意见反馈：</td>
+    <td><textarea name="proposal" id="proposal" cols="25" rows="3"></textarea></td>
+  </tr>
+  <tr>
+    <td height="32" align="right">附件上传：</td>
+    <td><input type="file" name="pathurl" id="pathurl"/></td>
+  </tr>
+  <tr>
+    <td height="115" colspan="2" align="center">
+    	<input type="submit" id="button" value="提交" />
+        <input type="reset" id="button1" value="重置" />
+        <input type="button" id="returngo" value="返回" />
+    </td>
+  </tr>
+</table>
+</form>
+<script type="text/javascript">
+$("#returngo").click(function(){
+	history.go(-1);
+});
+$("#button").click(function(){
+	var datetime = $('#datetime').val();
+	var proposal = $('#proposal').val();
+	if(!datetime || !proposal){
+		alert('时间或者意见不能为空！');
+		return false;	
+	}
+});
+</script>

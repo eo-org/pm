@@ -1,0 +1,71 @@
+<?php $row = $this->row;$i=1;?>
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>员工详情表</div><br>
+<div id='user' style="width:48%;font-size:16px;border:1px solid #000;float:left;margin-left:1%">
+<table id="users"  border="0" cellpadding="0" cellspacing="0">
+  <tr valign="middle">
+    <td width="10%" height="35" align="center">姓名</td>
+    <td width="8%" align="center">性别</td>
+    <td width="10%" align="center">年龄</td>
+    <td width="10%" align="center">QQ</td>
+    <td width="10%" align="center">电话</td>
+    <td width="16%" align="center">操作</td>
+  </tr>
+  <?php foreach ($row as $num => $arrone){?>
+  <tr align="center" valign="middle" id="information" class="<?php echo $arrone['id'];?>">
+    <td height="44" id="userid" style="color:<?php if($i==1){echo "#F00";}else{echo "#333";}?>;" class="<?php echo $arrone['id'];?>"><?php echo $arrone['username']?></td>
+    <td><?php if($arrone['sex']==1){echo '男';}else{echo '女';}?></td>
+    <td><?php echo $arrone['age']?></td>
+    <td><?php echo $arrone['QQ']?></td>
+    <td><?php echo $arrone['phone']?></td>
+    <td><a href='/project/users/edit/id/<?php echo $arrone['id'];?>'>修改</a>
+    &nbsp;&nbsp;<a class='resetpwd' id="<?php echo $arrone['id'];?>" href=''>重置密码</a>
+    &nbsp;&nbsp;<a class='deluser' id="<?php echo $arrone['id'];?>" href=''>辞职</a></td>
+  </tr>
+  <?php $i++; }?>
+</table>
+</div>
+<div id='detailstep' style="width:45%;float:left;margin-left:1%">
+<?php echo $this->seldetail;?>
+</div> 
+<script type="text/javascript">
+$('#users #userid').click(function(){
+	var uid = $(this).attr('class');
+	$("#users #information #userid").attr('style','color:#333');
+	$("#users #information ."+uid).attr('style','color:#F00');
+	$.ajax({
+		type: "GET",
+		url: '/project/users/seldetail/id/'+uid,
+		success: function(obj) {
+			$('#detailstep').html(obj);
+		}
+	});
+});
+$('.resetpwd').click(function(){
+	var uid = $(this).attr('id');
+    if(!confirm("您确定重置该员工的密码吗?")){
+        return false;
+    }else{
+    	$.ajax({
+    		type: "GET",
+    		url: '/project/users/resetpwd/id/'+uid,
+    		success: function(obj) {	
+    		}
+    	});
+    }
+});
+$('.deluser').click(function(){
+	var uid = $(this).attr('id');
+    if(!confirm("您确定该员工已经辞职了?")){
+        return false;
+    }else{
+    	$.ajax({
+    		type: "GET",
+    		url: '/project/users/deluser/id/'+uid,
+    		success: function(obj) {	
+    			$("#users ."+uid).remove();
+    		}
+    	});
+    }
+});
+</script>

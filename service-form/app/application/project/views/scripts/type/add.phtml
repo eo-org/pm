@@ -1,0 +1,54 @@
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>项目步骤添加表</div><br>
+<div style="text-align: center;">添加步骤&nbsp;<input id='addtable'type="button" value="添加" /></div>
+<div id="addt" style="margin:0 auto" align="center">
+
+</div>
+<input id="typeid" type="hidden" value="<?php echo $this->id;?>">
+<br>
+<div style="text-align: center;"><input id="button" type="submit" value="提交" name="button">
+<input id="button2" type="button" value="返回" name="button2">
+</div>
+<script type="text/javascript">
+var i=10;
+$('#addtable').click(function(){
+	i++;
+	var aa="<tr id=s"+i+" align='center'><td  colspan='2'><input type='text' value=''/>&nbsp;";
+	aa+="<select id='skillid"+i+"' class='seltype'>";
+	<?php foreach ($this->row as $num => $arrtwo){?>
+	aa+="<option value='<?php echo $arrtwo['id'];?>'><?php echo $arrtwo['skillname']?></option>";
+	<?php }?>
+	aa+="</select>";
+	aa+= "<input id='deloption' type='button' value='删除' class=s"+i+"></td><td height='32'>&nbsp;</td></tr>";
+	$("#addt").append(unescape(aa));
+});
+$('#deloption').live("click",function(){
+	var s = $(this).attr("class");
+	$("#"+s).remove();
+});
+$('#button').click(function(){
+	var attrValue = "";
+	var selvalue = "";
+	$("#addt :input:text").each(function(){
+		var value = $(this).attr("value");
+		attrValue+= value + ':';
+	});
+	$("#addt .seltype").each(function(){
+		var id = $(this).val();
+		selvalue+=id+':';		
+	});
+	var id = $("#typeid").val();
+	purl = '/project/type/add/id/'+id+'/val/'+attrValue+'/selval/'+selvalue;
+	var aj = $.ajax({
+		type: "POST",
+		url: purl,
+		success: function(obj) {
+			window.location.href='/project/type/index';			
+		}
+	});
+});
+$('#button2').click(function(){
+	window.location.href='/project/type/index';
+});
+
+</script>

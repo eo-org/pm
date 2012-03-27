@@ -1,0 +1,36 @@
+<table id="detailstep" width="100%" border="0" cellpadding="0" cellspacing="0" style="font-size:16px;" >
+  <tr align="center">
+  	<td height="53">项目名称</td>
+    <td>任务内容</td>
+    <td>完成人员</td>
+    <td>完成进度</td>
+    <td>上传路径</td>
+    <td>开始时间 </td>
+    <td>结束时间</td>
+    <td>状态</td>
+    <td>点评</td>
+    <td><?php if($this->sid == 0){echo '操作';}?></td>
+  </tr>
+  <?php foreach ($this->rowset as $num => $arrone){?>
+  <tr align="center">
+  	<td height="53"><a href='/project/detail/index/id/<?php echo $arrone['detailid'];?>/'><?php echo $arrone['projectname']?></a></td>
+    <td><?php echo $arrone['content']?></td>
+    <td><?php echo $_SESSION['USERNAME']?></td>
+    <td><?php echo $arrone['percentage']?></td>
+    <td><?php 
+	    $arrbox = explode("&", $arrone['pathurl']);
+	    for($i=0;$i<count($arrbox);$i++){
+	    	echo $arrbox[$i]."<br>";
+	    }
+    ?></td>
+    <td><?php echo $arrone['starttime']?></td>
+    <td><?php echo $arrone['endtime']?></td>
+    <td><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
+    <td><?php echo $arrone['assess']?></td>
+    <td><?php if($this->sid == 0){ ?><a href='/project/individual/edit/id/<?php echo $arrone['id'];?>'>编辑</a><?php }?></td>
+  </tr>
+  <?php }?>
+  <tr align="center">
+    <td height="66" colspan="9">&nbsp;</td>
+  </tr>
+</table>

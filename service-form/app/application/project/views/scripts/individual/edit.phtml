@@ -1,0 +1,21 @@
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>项目步骤进行表</div><br>
+
+<?php echo $this->html;?>
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	var aa="<input id='addfile' type='button' value='添加' />";
+	$("#percentage-element").append(unescape(aa));
+	var i=5;
+	$('#addfile').click(function(){
+		i++;
+		var aa="<div id=s"+i+"><span><input type='text' id=s"+i+" value=''/></span>&nbsp;<span><input id='deloption' type='button' value='删除' did=s"+i+"></span></div>";
+		$("#addt").append(unescape(aa));
+	});
+	$('#deloption').live("click",function(){
+		var s = $(this).attr("did");
+		$("#"+s).remove();
+	});
+});
+</script>

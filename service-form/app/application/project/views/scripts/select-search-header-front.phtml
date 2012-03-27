@@ -1,0 +1,194 @@
+<?
+$this->selectFields = $this->selectFields == null ? array() : $this->selectFields;
+$this->recorder     = $this->recorder == null ? array() : $this->recorder;
+$this->hiddenFields = $this->hiddenFields == null ? array() : $this->hiddenFields;
+$this->presetFields = $this->presetFields == null ? array() : $this->presetFields;
+?>
+
+<table class='datalist'><thead>
+    <tr class='title-row'>
+        <?
+        foreach($this->labels as $value) {
+            if($value == '#') {
+        		echo "<th style='width: 40px; text-align: left;'>";
+        		echo "<input class='select-all' type='checkbox' title='全选' name='select-all' value='true' />".$value;
+        		echo "</th>";
+            } else if($value == 'ID') {
+                echo "<th style='width: 40px;'>".$value."</th>";
+            } else if($value == 'ACTION') {
+            	echo "<th style='width: 40px;'></th>";
+            } else {
+                echo "<th>".$value."</th>";
+            }
+        }
+        ?>
+    </tr>
+    <tr class='filter-row'>
+        <?foreach($this->labels as $key => $value) { ?>
+        <th>
+            <?
+            if(substr($key, 0, 1) == '~') {
+                switch($key) {
+                    case '~selectedIds':
+            ?>
+            <select class='filter-field' id='filter_selectedIds' name='filter_selectedIds'>
+        		<option value='all'>any</option>
+        		<?//if(array_key_exists('selectedIds', $this->presetFields) && !empty($this->presetFields['selectedIds'])) {?>
+        		<!-- option id='filter_selectedIds_yes_option' value='<?=$this->presetFields['selectedIds']?>' selected>yes</option-->
+        		<?//} else {?>
+        		<!-- option id='filter_selectedIds_yes_option' value='selectedIds'>yes</option-->
+        		<?//} ?>
+        		<option id='filter_selectedIds_yes_option' value='selectedIds'>yes</option>
+        	</select>
+            <?
+                    break;
+                }
+            } else if(array_key_exists($key, $this->selectFields)) {
+                if($this->selectFields[$key] !== NULL) {
+            ?>
+            <select class='filter-field' name='<?='filter_'.$key ?>'>
+                <option value=''></option>
+                <?foreach($this->selectFields[$key] as $val => $label) { ?>
+                <option value='<?=$val ?>'><?=$label ?></option>
+                <?} ?>
+            </select>
+            <? } else {
+                    echo "&nbsp;";
+                }
+            } else { ?>
+            <input type='text' class='filter-field' name='<?='filter_'.$key ?>' value='' />
+            <?
+            }
+            ?>
+        </th>
+        <?} ?>
+    </tr>
+    <tr class='search-row'>
+        <td class='search-td' colspan='<?=count($this->labels) ?>'>
+            <div class='search-button'>
+                <a href='#' id='grid-invoker' class='search-link' url='<?=$this->url?>'>搜索</a>
+                <?foreach($this->hiddenFields as $fieldName => $value) { ?>
+                <input class='filter-field' type='hidden' name='filter_<?=$fieldName ?>' value='<?=$value ?>' / >
+                <?} ?>
+          	</div>
+          	<div class='clear'></div>
+        </td>
+    </tr>
+    <?if(!is_null($this->selectActions)){?>
+    <tr>
+    	<td class='action-td' colspan='<?=count($this->labels) ?>'>
+    		<div class='actions'>
+	    		<span >操作：</span>
+	    		<select class='select-actions' name='action-name'>
+	    			<option ></option>
+	    			<?foreach($this->selectActions as $action=>$value){?>
+	        		<option value='<?=$action?>'><?=$value['name']?></option>
+	        		<?}?>
+	        	</select>
+	        	<?foreach($this->selectActions as $k=>$v){?>
+	        	<input type='hidden' name='actionUrl[<?=$k?>]' value='<?=$v['url']?>' />
+	        	<?}?>
+        	</div>
+    	</td>
+    </tr>
+    <?}?>
+</thead><tbody id='grid-container'>
+</tbody><tfoot>
+<tr><td colspan='<?=count($this->labels) ?>'><div id='page-TD'></div></td></tr>
+</tfoot></table>
+
+<input type='hidden' id='checkedIds' name='checkedIds' value='' />
+<?php
+$optionsArr = array();
+foreach($this->selectFields as $key => $value) {
+    if($value !== NULL) {
+        $optionsString = '';
+        if(substr($key, 0, 1) == '@') {
+    	    $key = substr($key, 1);
+        }
+        $optionsString.= $key.':{';
+        $valuePair = array();
+        foreach($value as $k => $v) {
+            $valuePair[] = $k.':\''.$v.'\'';
+        }
+//        if() {
+//        	$optionsString = substr($optionsString, 0, -1);
+//        }
+        $optionsString.= implode(',', $valuePair).'}';
+        $optionsArr[] = $optionsString;
+    }
+}
+
+$recorderArr = array();
+foreach($this->recorder as $key => $value) {
+    if(is_array($value)) {
+        $recorderString = '';
+        $recorderString.= $key.':{';
+        foreach($value as $k => $v) {
+            $recorderString.= $k.':\''.$v.'\',';
+        }
+        $recorderString = substr($recorderString, 0, -1);
+        $recorderString.= '}';
+    } else {
+        $recorderString = '';
+        $recorderString.= $value.':{}';
+    }
+    $recorderArr[] = $recorderString;
+}
+?>
+
+<script type="text/javascript">
+$('.select-all').click(function(){
+	var selectIdArr = $('.select-id');
+	if($(this).is(':checked')) {
+		selectIdArr.each(function(i, obj) {
+			$(obj).attr('checked', true);
+		});
+	} else {
+		selectIdArr.each(function(i, obj) {
+			$(obj).attr('checked', false);
+		});
+	}
+});
+
+var ajaxGrid = $().AjaxGrid({
+	displayFields:['<?=implode("','", array_keys($this->labels))?>'],
+	fieldOptions:{<?=implode(',', $optionsArr)?>},
+	recorder:{<?=implode(',', $recorderArr)?>}
+<?
+	echo $this->actionId			== null ? "" : ",actionId			:'$this->actionId'";
+	echo $this->doubleClickAction	== null ? "" : ",doubleClickAction	:'$this->doubleClickAction'";
+	echo $this->doubleClickHref		== null ? "" : ",doubleClickHref	:'$this->doubleClickHref'";
+	echo $this->initSelectRun		== null ? "" : ",initSelectRun		: $this->initSelectRun";
+	echo $this->hashParam			== null ? "" : ",hashParam			:'$this->hashParam'";
+	echo $this->click				== null ? "" : ",click				:'".$this->click['action']."'";
+?>
+});
+<?if($this->click != null) {?>
+var cm = $().ContextMenuInit();
+	<?foreach($this->click['menuItems'] as $arr) {?>
+cm.appendItem(
+	"<?=$arr[0]?>",
+	"<?=$arr[1]?>"
+);
+<?
+	}
+}
+?>
+EventMessenger.bind("updateWithFilter", function(searchQuery) {
+	ajaxGrid.postAction(searchQuery);
+});
+
+var currentSelectedHidden = $("#checkedIds");
+var sshSave = function() {
+	var recorder = ajaxGrid.getRecord();
+	var currentSelectedArr = [];
+	for(key in recorder) {
+		currentSelectedArr.push(key);
+	}
+	var currentSelectedString = currentSelectedArr.join(',');
+	currentSelectedHidden.val(currentSelectedString);
+
+	$('form:first').submit();
+};
+</script>

@@ -1,0 +1,20 @@
+<div class='toolbar'>
+	<div class='main'>
+		<ul class='left'>
+			<?php echo $this->aclLink('category-section', 'index', '目录组')?>
+			<?php echo $this->aclLink('artical', 'index', '内容管理')?>
+			<?php echo $this->aclLink('product', 'index', '产品管理')?>
+			<?php echo $this->aclLink('ad', 'index', '广告管理')?>
+			<?php echo $this->aclLink('message-pattern', 'index', '编辑问卷')?>
+			<?php echo $this->aclLink('message', 'index', '用户反馈')?>
+			<?php echo $this->aclLink('file', 'list', '文件管理')?>
+			<?php echo $this->aclLink('system', 'index', '系统')?>
+			<?php echo $this->aclLink('brick', 'index', '模块管理')?>
+		</ul>
+		<ul class='right'>
+			<li><a href='/admin/account'>我的账户</a></li>
+			<li><a href='/admin/index/logout'>退出后台</a></li>
+		</ul>
+	</div>
+	<div class='sub'></div>
+</div>

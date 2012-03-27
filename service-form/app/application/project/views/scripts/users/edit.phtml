@@ -1,0 +1,12 @@
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>员工信息修改表</div><br>
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#remarks').attr("cols","25");
+	$('#remarks').attr("rows","3");
+	<?php foreach ($this->rowset as $num => $arrone){?>
+		$('#skill-element #skill-<?php echo $arrone['skillid'];?>').attr("checked","checked");
+	<?php }?>
+});
+</script>
+<?php echo $this->html;?>

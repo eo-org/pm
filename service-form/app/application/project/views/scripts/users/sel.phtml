@@ -1,0 +1,42 @@
+
+<?php $i=1;$j=1;?>
+<div id="detail" style="BACKGROUND:transprant;overflow:auto;width:25%;height:200px;border:1px solid #000;font-size:16px;float:left;" align=left>
+处理的项目：
+<ul id="seldetail">
+<?php if($this->if == 1){?>
+	<?php foreach ($this->rowdetail as $num => $arrone){?>
+	<li id="<?php echo $arrone['id'];?>" class='detail' <?php if($i == 1){?>style="color: #F00"<?php }?>>
+		<?php echo $i."、".$arrone['projectname'];?>
+	</li>
+<?php $i++; }?>
+<?php }else{echo '&nbsp;&nbsp;暂无处理项目!';}?>
+</ul>
+</div>
+<div id="step" style="BACKGROUND:transprant;overflow:auto;width:30%;height:200px;border:1px solid #000;font-size:16px;float:left;margin-left:1%" align=left>
+处理项目的步骤
+<ul id="selstep">
+<?php if($this->if == 1){?>
+	<?php foreach ($this->rowstep as $num => $arrone){?>
+	<li  id="<?php echo $arrone['id'];?>">
+		<?php echo $j."、".$arrone['content']; if($arrone['state']==0){echo "(未完成)";}else{echo "(完成)";}?>
+	</li>
+	<?php $j++; }?>
+<?php }else{echo '&nbsp;&nbsp;暂无处理项目步骤!';}?>
+</ul>
+</div>
+<script type="text/javascript">
+$('#seldetail .detail').click(function(){
+	var did = $(this).attr('id');
+	$('#detail #seldetail #<?php echo $this->detailid;?>').attr('style','color:#333');
+	$("#detail #seldetail .font").attr('style','color:#333');
+	$("#detail #seldetail #"+did).attr('style','color:#F00');
+	$("#detail #seldetail #"+did).attr('class','font');
+	$.ajax({
+		type: "GET",
+		url: '/project/users/selstep/did/'+did+'/uid/<?php echo $this->uid;?>',
+		success: function(obj) {
+			$('#step #selstep').html(obj);
+		}
+	});
+});
+</script>

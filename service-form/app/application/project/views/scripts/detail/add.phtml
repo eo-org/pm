@@ -1,0 +1,39 @@
+<div class="zend_form">
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>项目步骤添加表</div><br>
+<div style="text-align: center;">添加步骤&nbsp;<input id='addtable'type="button" value="添加" /></div>
+<div id="addt" style="text-align: center;">
+
+</div>
+<input id="detailid" type="hidden" value="<?php echo $this->id;?>">
+<div style="text-align: center;"><input id="button" type="submit" value="提交" name="button"></div>
+</div>
+<script type="text/javascript">
+//2011-02-16 王良峰 功能块的选项修改和删除
+var i=10;
+$('#addtable').click(function(){
+	i++;
+	var aa="<div id=s"+i+"><span><input type='text' id=s"+i+" value=''/></span>&nbsp;<span><input id='deloption' type='button' value='删除' did=s"+i+"></span></div>";
+	$("#addt").append(unescape(aa));
+});
+$('#deloption').live("click",function(){
+	var s = $(this).attr("did");
+	$("#"+s).remove();
+});
+$('#button').click(function(){
+	var attrValue="";
+	$("#addt :input:text").each(function(){
+		var value = $(this).attr("value");
+		attrValue+= value + ':';
+	});
+	var id = $("#detailid").val();
+	purl = '/project/detail/add/id/'+id+'/val/'+attrValue;
+	var aj = $.ajax({
+		type: "POST",
+		url: purl,
+		success: function(obj) {
+			window.location.href='/project/step/index/id/'+id;			
+		}
+	});
+});
+</script>

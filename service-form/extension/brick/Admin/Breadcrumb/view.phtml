@@ -1,0 +1,18 @@
+<div class='brick-admin-breadcrumb'>
+<?php
+$count = count($this->trailArr);
+$i = 1;
+foreach($this->trailArr as $l) {
+	echo $i > 1 ? '&gt;&gt;&nbsp;' : '';
+	
+	if($i == $count) { //last item in the trail
+		echo "<span>".$l->label."</span>";
+	} else {
+?>
+<a class='link' href='<?php echo $l->getHref()?>' title=''><?php echo $l->label?></a>
+<?php
+	}
+	$i++;
+}
+?>
+</div>

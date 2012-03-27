@@ -1,0 +1,119 @@
+<div style="width:600px;margin:0 auto;font-size:16px;">
+<table id="typestep" width="80%" border="0" cellpadding="0" cellspacing="0" align="center">
+  <tr>
+    <td height="50" colspan="3" align="center"><div id='title'>福网互联科技有限公司</div><br>
+	<div id='table'>类型<font color="#f00"><?php echo $this->typename;?></font>的步骤详情表</div><br></td>
+  </tr>
+  <tr align="center"  height="32">
+    <td>内容</td>
+    <td>技术支持</td>
+    <td>操作</td>
+  </tr>
+  <?php if(empty($this->rowset)){echo "<tr><td height='32' align='center'>暂无步骤，请添加！</td><td colspan='3'>&nbsp;</td></tr>";}else{?>
+  <?php foreach($this->rowset as $num => $arrone){?>
+  <tr align="center" height="32" id="tr<?php echo $arrone['id'];?>">
+    <td id="typestep"><?php echo $arrone['typestep'];?></td>
+    <td id="skillname" class="<?php echo $arrone['skillid'];?>"><?php echo $arrone['skillname'];?></td>
+    <td><a id="editstep" href="#" class="<?php echo $arrone['id'];?>">修改</a>&nbsp;&nbsp;
+    &nbsp;&nbsp;<a href="/project/tschedule/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>">删除</a></td>
+  </tr>
+  <?php }}?>
+  </table>
+  <input id="detailid" type="hidden" value="<?php echo $this->deid;?>">
+  <table id="add" width="30%" style="font-size:16px;" >
+	  <tr align="right">
+	  	<td><a id ="addstep" href="#">添加步骤</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id ="submitstep" href="#">确定</a>&nbsp;&nbsp;</td>
+	  </tr>
+  </table>
+</div>
+<script type="text/javascript">
+var i=0;
+$('#editsubmit').live("click",function(){
+	var id = $(this).attr('class');
+	var typestep = $('#tr'+id+' #step').val();
+	if(typestep == ''){alert("任务步骤不能为空！");return false;}
+	var skillid = $('#tr'+id+' #skillid').val();
+	var skillname = $('#tr'+id+' #skillid').find('option:selected').text();
+	var ajax = $.ajax({
+		type: "POST",
+		url: '/project/tschedule/edit/id/'+id+'/typestep/'+typestep+'/skillid/'+skillid,
+		success: function(obj) {
+			if(obj.result == 'success') {
+				alert("对不起，修改没有成功！");
+				window.location.href='/project/tschedule/index/id/<?php echo $this->deid;?>';					
+			}else{
+				var aa = "<td id='typestep'>"+typestep+"</td><td class='"+skillid+"' id='skillname'>"+skillname+"</td>";
+				aa+="<td><a class='"+id+"' href='#' id='editstep'>修改</a>&nbsp;&nbsp;";
+				aa+="&nbsp;&nbsp;<a href='/project/tschedule/del/deid/11/id/7'>删除</a></td>";
+				$("#tr"+id).html(aa);
+			}
+		}
+	});
+	return false;
+});
+$('#editstep').live("click",function(){
+	var id = $(this).attr('class');
+	var skillid = $("#tr"+id+" #skillname").attr('class');
+	var typestep = $("#tr"+id+" #typestep").text();
+    var aa="<td id='typestep'><input type='text' id='step' value='"+typestep+"'/></td><td class='2'>";
+	aa+="<select id='skillid' class='seltype'>";
+	<?php foreach ($this->row as $num => $arrtwo){?>
+		aa+="<option value='<?php echo $arrtwo['id'];?>'";
+		if(skillid == <?php echo $arrtwo['id'];?>){
+			aa+="selected='selected'";
+		}
+		aa+="><?php echo $arrtwo['skillname']?></option>";
+	<?php }?>
+	aa+="</select></td>";
+	aa+="<td><a href='#' id='editsubmit' class='"+id+"'>确定</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' id='editreturn' class='"+id+"'>返回</a></td>";
+	$("#tr"+id).html(aa);
+	return false;
+});
+$('#editreturn').live("click",function(){
+	var id = $(this).attr('class');
+	$.ajax({
+		type: "POST",
+		url: '/project/tschedule/sel/id/'+id+'/deid/<?php echo $this->deid;?>',
+		success: function(obj) {
+			$("#tr"+id).html(obj);
+		}
+	});
+});
+$('#addstep').click(function(){
+	i++;
+	var aa="<tr id=s"+i+" align='center'><td  colspan='2'><input type='text' value=''/>&nbsp;";
+	aa+="<select id='skillid"+i+"' class='seltype'>";
+	<?php foreach ($this->row as $num => $arrtwo){?>
+	aa+="<option value='<?php echo $arrtwo['id'];?>'><?php echo $arrtwo['skillname']?></option>";
+	<?php }?>
+	aa+="</select>";
+	aa+= "<input id='deloption' type='button' value='删除' class=s"+i+"></td><td height='32'>&nbsp;</td></tr>";
+	$("#typestep").append(unescape(aa));
+	return false;
+});
+$('#deloption').live("click",function(){
+	var s = $(this).attr("class");
+	$("#"+s).remove();
+});
+$('#submitstep').click(function(){
+	var attrValue="";
+	var selvalue="";
+	$("#typestep :input:text").each(function(){
+		var value = $(this).attr("value");
+		attrValue+= value + ':';
+	});
+	$("#typestep .seltype").each(function(){
+		var id = $(this).val();
+		selvalue+=id+':';		
+	});
+	var id = $("#detailid").val();
+	purl = "/project/tschedule/create/id/"+id+"/val/"+attrValue+"/selval/"+selvalue;
+	var aj = $.ajax({
+		type: "POST",
+		url: purl,
+		success: function(obj) {
+			window.location.href='/project/tschedule/index/id/'+id;			
+		}
+	});
+});
+</script>

@@ -1,0 +1,113 @@
+<?php
+$request = Zend_Controller_Front::getInstance()->getRequest();
+?>
+
+<?=$this->doctype() ?>
+<html>
+<head>
+<?=$this->partial('head.phtml', $this) ?>
+
+<style>  
+
+#menu_login{width:100%;height:30px;background:#ccc;float:right;text-align:center;valign:center;color:#FFF;line-height:30px;
+	 position:fixed !important; top:0px;    
+    position:absolute; z-index:100; top:expression(offsetParent.scrollTop+20);right:20px; }  
+#show_hide{width:50px;height:20px;background:#ccc;float:right;text-align:center;color:#F00;    
+    /* position:fixed !important; top:0px;    
+    position:absolute; z-index:100; top:expression(offsetParent.scrollTop+20);right:20px; */}   
+</style>   
+</head>
+
+<body>
+	<?php if(isset($_SESSION['USERNAME'])){?>
+	<div id="navigation">
+		<div id="menu_login">欢迎您<?php echo $_SESSION['USERNAME'];?>登录！&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/project/individual/index/'>个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/project/detail/index/'>项目详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/project/type/index/'>类型详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/project/users/index/'>员工管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/project/admin/close/'>退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
+	</div>
+	<?php }?>
+	<div class='admin_main_frame'>
+		<?php
+		if(false) {
+		?>
+		<div class='desc'>
+			<div class='head'>
+				<?php echo $this->head?>
+			</div>
+			<?php if(!empty($this->portalArr)) {?>
+			<div class='portals'>
+				<?php
+				foreach($this->portalArr as $p) {
+					if($p['controllerName'] == $controllerName) {
+				?>
+				
+					<a class='selected' href='<?php echo $p['href']?>'><?php echo $p['label']?></a>
+				<?php
+					} else {
+				?>
+					<a href='<?php echo $p['href']?>'><?php echo $p['label']?></a>
+				<?php	
+					}
+				}
+				?>
+			</div>
+			<?php }?>
+		</div>
+		
+		
+		<?php
+		}
+		?>
+		
+		<div class='desc'>
+			<div class='head'>
+				<?php echo $this->head?>
+			</div>
+		</div>
+		
+		<div class='control'>
+			<?php
+			$actionMenu = App_Brick_Controller::createFixedBrick('Admin_ActionMenu');
+			$actionMenu->setMenu($this->actionMenu);
+			echo $actionMenu->render();
+			?>
+		</div>
+		
+		<div class='flash-message'>
+		<?php 
+			$messenger = new Zend_Controller_Action_Helper_FlashMessenger();
+			$messages = $messenger->getMessages();
+			if(count($messages) > 0) {
+		?>
+			<div class='brick-admin-flash-message'>
+		<?php	
+				foreach($messages as $m) {
+					echo "<div>".$m."</div>";
+				}
+		?>
+			</div>
+		<?php
+			}
+		?>
+		</div>
+		
+		<div class='under-desc'>
+			<?=$this->layout()->content ?>
+		</div>
+	</div>
+	<!-- *********************lightbox divs below this line*********************  -->
+	<div id='lightbox-blackbox'></div>
+	<div id='lightbox-whitebox'>
+		<div class='closer'></div>
+		<div class='content'></div>
+	</div>
+	<div class="finderbox">
+		<div class='closer'>CLOSE</div>
+		<div class='content'></div>
+	</div>
+</body>
+</html>

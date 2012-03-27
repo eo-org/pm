@@ -1,0 +1,115 @@
+<br><br>
+<?php $row = $this->row;?>
+<?php $rowset = $this->rowset;?>
+<table id="userinformation" width="60%" border="0" cellpadding="0" cellspacing="1" style="font-size:16px;margin-left:10%;">
+  <tr>
+    <td width="20%" height="42" align="right">姓名：</td>
+    <td width="15%" id="selname"><?php echo $row['username'];?></td>
+    <td colspan="2" rowspan="3" style="vertical-align:top;" id="img" >&nbsp;&nbsp;
+    &nbsp;&nbsp;<img src="/uploadimg/img_6.jpg" width="100px" height="100px" />
+    <div id="loadfile" style="overflow:hidden;position:absolute">
+    <input type="file" id="file" size="1" style="position:absolute;z-index:100;margin-left:-180px;font-size:60px;opacity:0;filter:alpha(opacity=0);" >
+    </div></td>
+  </tr>
+  <tr>
+    <td height="42" align="right">性别：</td>
+    <td id="selsex"><?php if($row['sex']==1){echo '男';}else{echo '女';}?></td>
+  </tr>
+  <tr>
+    <td height="42" align="right">年龄： </td>
+    <td id="selage"><?php echo $row['age'];?></td>
+  </tr>
+  <tr>
+    <td height="42" align="right">QQ：</td>
+    <td id="selQQ"><?php echo $row['QQ'];?></td>
+    <td width="4%" align="right">电话：</td>
+    <td width="17%" id="selphone"><?php echo $row['phone'];?></td>
+  </tr>
+  <tr>
+    <td height="42" align="right">部门：</td>
+    <td colspan="3" id='selskill'><?php foreach ($rowset as $num => $arrone){ echo $arrone['skillname']."&nbsp;&nbsp;";}?></td>
+  </tr>
+  <tr>
+    <td height="42" colspan="4" align="center" id="operating">
+    	<input type="button" name="button" id="editinformation" value="修改信息" />
+      	<input type="button" name="button" id="editpassword" value="修改密码" />
+    </td>
+  </tr>
+</table>
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#editinformation').live("click",function(){
+		var loadfile = "<input type='button' name='button' id='loadfilebt' value='上传图片' style='margin-left:35px;float:left;' />";
+		$("#loadfile").append(unescape(loadfile));
+		var selname = "<input type='text' id='username' value='<?php echo $row['username']?>' />";
+		$("#selname").html(unescape(selname));
+		var selsex = "<select name='sex' id='sex'>";
+			selsex+= "<option value='1' <?php if($row['sex']==1){echo "selected='selected'";}?> >男</option>";
+			selsex+= "<option value='0' <?php if($row['sex']!=1){echo "selected='selected'";}?>>女</option></select>";
+		$("#selsex").html(unescape(selsex));
+		var selage = "<select name='age' id='age'>";
+			selage+= "<option value='20以下' <?php if($row['age']=='20以下'){echo "selected='selected'";}?> >20以下</option>";
+			selage+= "<option value='20~30' <?php if($row['age']=='20~30'){echo "selected='selected'";}?> >20~30</option>";
+			selage+= "<option value='30~40' <?php if($row['age']=='30~40'){echo "selected='selected'";}?> >30~40</option>";
+			selage+= "<option value='40以上' <?php if($row['age']=='40以上'){echo "selected='selected'";}?> >40以上</option>";
+			selage+= "<option value='保密' <?php if($row['age']=='保密'){echo "selected='selected'";}?> >保密</option></select>";
+		$("#selage").html(unescape(selage));
+		var selQQ = "<input type='text' id='QQ' value='<?php echo $row['QQ']?>' />";
+		$("#selQQ").html(unescape(selQQ));
+		var selphone = "<input type='text' id='phone' value='<?php echo $row['phone']?>' />";
+		$("#selphone").html(unescape(selphone));
+		var selskill = "";
+		<?php foreach ($this->skillinformation as $num => $arrtwo){?>
+			selskill+= "<input name='skill' type='checkbox' id='<?php echo $arrtwo['id'];?>'> <?php echo $arrtwo['skillname'];?>";
+		<?php }?>
+		$("#selskill").html(unescape(selskill));
+		<?php foreach ($rowset as $num => $arrthree){?>
+			$('#selskill #<?php echo $arrthree['skillid'];?>').attr("checked","checked");
+		<?php }?>
+		var operating = "<input type='button' id='submituser' value='确定' /><input type='button' id='return' value='返回' />";
+		$("#operating").html(unescape(operating));
+	});
+	$('#return').live('click',function(){
+		var table = "<tr><td width='20%' height='42' align='right'>姓名：</td><td width='15%' id='selname'><?php echo $row['username'];?></td>";
+		table+= "<td colspan='2' rowspan='3' style='vertical-align:top;' id='img' >&nbsp;&nbsp;";
+		table+= "&nbsp;&nbsp;<img src='/uploadimg/img_6.jpg' width='100px' height='100px' /><div id='loadfile' style='overflow:hidden;position:absolute'>";
+		table+= "<input type='file' id='file' size='1' style='position:absolute;z-index:100;margin-left:-180px;font-size:60px;opacity:0;filter:alpha(opacity=0);' >";
+		table+= "</div></td></tr><tr><td height='42' align='right'>性别：</td>";
+		table+= "<td id='selsex'><?php if($row['sex']==1){echo '男';}else{echo '女';}?></td>";
+		table+= "</tr><tr><td height='42' align='right'>年龄： </td><td id='selage'><?php echo $row['age'];?></td>";
+		table+= "</tr> <tr><td height='42' align='right'>QQ：</td><td id='selQQ'><?php echo $row['QQ'];?></td>";
+		table+= "<td width='4%' align='right'>电话：</td><td width='17%' id='selphone'><?php echo $row['phone'];?></td>";
+		table+= "</tr><tr><td height='42' align='right'>部门：</td><td colspan='3' id='selskill'>";
+		table+= "<?php foreach ($rowset as $num => $arrone){ echo $arrone['skillname'].'&nbsp;&nbsp;';}?></td>";
+		table+= "</tr><tr><td height='42' colspan='4' align='center' id='operating'><input type='button' name='button' id='editinformation' value='修改信息' />";
+		table+= "<input type='button' name='button' id='editpassword' value='修改密码' /></td></tr>";
+		$("#userinformation").html(unescape(table));
+	});
+	$('#submituser').live('click',function(){
+		var username = $('#username').val();
+		var sex="";
+		var age="";
+		var QQ = $('#QQ').val();
+		var phone = $('#phone').val();
+		var skillid ="";  
+		$("#selsex #sex").each(function(){
+			sex = $(this).val();
+		});
+		$("#selage #age").each(function(){
+			age = $(this).val();
+		});	 
+		$('input[name="skill"]:checked').each(function(){   
+			skillid+= $(this).attr('id')+':';   
+		});   
+		if(skillid.length==""){alert('部门不能为空！'); }   
+		$.ajax({
+			type: "POST",
+			url: '/project/individual/edituser/username/'+username+'/sex/'+sex+'/age/'+age+'/QQ/'+QQ+'/phone/'+phone+'/skillid/'+skillid,
+			success: function(obj) {
+				window.location.href='/project/individual/sel/';			
+			}
+		});
+		
+	});
+});
+</script>
