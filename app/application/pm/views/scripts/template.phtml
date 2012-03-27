@@ -22,11 +22,11 @@ $request = Zend_Controller_Front::getInstance()->getRequest();
 	<?php if(isset($_SESSION['USERNAME'])){?>
 	<div id="navigation">
 		<div id="menu_login">欢迎您<?php echo $_SESSION['USERNAME'];?>登录！&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/project/individual/index/'>个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/project/detail/index/'>项目详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/project/type/index/'>类型详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/project/users/index/'>员工管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/project/admin/close/'>退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/pm/individual/index/'>个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/pm/detail/index/'>项目详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/pm/type/index/'>类型详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/pm/users/index/'>员工管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/pm/admin/close/'>退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	</div>
 	<?php }?>

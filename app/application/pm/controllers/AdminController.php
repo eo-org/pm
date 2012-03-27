@@ -6,6 +6,7 @@ class Pm_AdminController extends Zend_Controller_Action
 	{
 		$this->_form = new Form_Admin_Index();
 		$this->_tb = Class_Base::_('Users');
+		echo Class_Server::extUrl();
 	}
 	
 	public function indexAction()
@@ -27,7 +28,7 @@ class Pm_AdminController extends Zend_Controller_Action
 				$_SESSION['USERID'] = $rowset['username'];
 				$_SESSION['USERNAME'] = $row['username'];
 				$_SESSION['PERMISSIONS'] = $rowset['permissions'];
-				$this->_helper->redirector->gotoSimple('index');
+				$this->_helper->redirector->gotoSimple('detail/index');
 			}
 			$this->view->errorMsg = "用户名或密码错误";
 		}
