@@ -1,0 +1,603 @@
+[draggable=true] {-webkit-user-drag: element; -webkit-user-select: none; -moz-user-select: none;}
+.admin_main_frame a {
+	color: #0077BB;
+}
+/****************************************************/
+/**Finder********************************************/
+/****************************************************/
+.finderbox {
+	height: 540px;
+	width: 100%;
+	border-radius: 4px 4px 0 0;
+	background: #000;
+	box-shadow: 0 -5px 10px #777;
+	position: fixed;
+	z-index: 1000;
+	bottom: -340px;
+	left: 0;
+	display: none;
+}
+.finderbox .closer {
+	cursor: pointer;
+	height: auto;
+	width: auto;
+	color: white;
+}
+.finderbox {
+	height: 515px;
+	border-radius: 4px 4px 0 0;
+	background: white;
+	margin: 20px 5px 0 5px;
+}
+/****************************************************/
+/**Brick ActionMenu**********************************/
+/****************************************************/
+.admin_main_frame .control {
+	overflow: auto;
+	padding: 2px;
+}
+.admin_main_frame .control a.action-menu {
+	display: block;
+	float:left;
+	margin: 0 5px;
+	border: 1px solid #0077BB;
+	background-color: #EEE;
+	padding: 5px 20px;
+	border-radius: 2px;
+	box-shadow: 1px 1px 2px #777;
+}
+.admin_main_frame .control a.action-menu:hover {
+	box-shadow: 0px 0px 2px #777;
+	text-decoration: none;
+}
+/****************************************************/
+/**Page Description**********************************/
+/****************************************************/
+.admin_main_frame .desc {
+	height: 32px;
+	border-bottom: 3px solid #aaa;
+	margin-bottom: 10px; 
+	padding-top: 30px;
+}
+.admin_main_frame .desc .head  {
+	font-size: larger;
+	font-weight: bold;
+	color: #333;
+	padding: 8px 20px;
+	float: left;
+}
+.admin_main_frame .desc .portals {
+	float: right;
+	width: auto;
+	margin-right: 10px;
+	font-size: 12px;
+}
+.admin_main_frame .desc .portals a {
+	display: block;
+	float: left;
+	padding-top: 8px;
+	margin-left: 1px;
+	margin-top: 2px;
+	height: 20px;
+	width: 75px;
+	border: 1px solid #999;
+	border-bottom: none;
+	border-radius: 8px 8px 0 0;
+	background-color: #444;
+	text-align: center;
+	color: #aaa;
+}
+.admin_main_frame .desc .portals a.selected {
+	color: white;
+	background-color: #aaa;
+	margin-top: 0px;
+	padding-top: 12px;
+	height: 22px;
+}
+.admin_main_frame .under-desc {
+	padding: 5px;
+}
+.admin_main_frame .under-desc .action-links {
+	padding: 10px;
+	overflow: auto;
+}
+.admin_main_frame .under-desc .action-links a {
+	display: block;
+	color: #0077BB;
+	font-size: 14px;
+	float: left;
+}
+/***********************/
+/***********************/
+/*********Files*********/
+/***********************/
+/***********************/
+.file-control {
+	margin: 10px;
+}
+.file-control #sub-container-invoker {
+	position: relative;
+	float: left;
+	width: 100px;
+	overflow: hidden;
+}
+.file-control #sub-container-invoker ul {
+	padding-left: 0;
+}
+.file-control #sub-container-invoker ul ul {
+	padding-left: 10px;
+}
+.file-control #sub-container-invoker a {
+	border: 1px solid #DDD;
+	border-radius: 4px 0 0 4px;
+	background-color: white;
+	position: relative;
+	display: block;
+	padding: 5px 0 5px 5px;
+	margin: 5px 0;
+	width: 94px;
+	box-shadow: none;
+}
+.file-control #sub-container-invoker a.selected {
+	z-index: 10;
+	background-color: #F8F8F8;
+}
+.file-control #sub-container-invoker #file-archive {
+	border: 2px solid #DDD;
+	width: 60px;
+	padding: 10px;
+	text-align: center;
+	background-color: #F8F8F8;
+}
+.file-control #sub-container-invoker #file-archive:hover {
+	background-color: #F0F0F0;
+}
+.file-control #sub-container {
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	position: relative;
+	left: -1px;
+	background-color: #F8F8F8;
+	min-height: 360px;
+	width: 800px;
+	padding: 5px;
+	float: left;
+	box-shadow: 5px 5px 5px #777;
+}
+#sub-container .file-selector {
+	overflow: auto;
+	width: 780px;
+	height: 320px;
+}
+#sub-container .file-selector .file {
+	width: 110px;
+	height: 150px;
+	margin: 5px;
+	float: left;
+	border: 1px solid #DDD;
+	background: white;
+	cursor: pointer;
+}
+#sub-container .file-selector .file .frame {
+	width: 100px;
+	height: 100px;
+	margin: 5px;
+	overflow: hidden;
+}
+#sub-container .file-selector .file .info {
+	width: 100px;
+	text-align: center;
+	font-size: smaller;
+	line-height: 1.4em;
+}
+/***********************/
+/***********************/
+/*****Tree Structure****/
+/***********************/
+/***********************/
+div.tree-structure {
+	padding: 0px 15px;
+	margin: 4px;
+	background-color: #fefefe;
+	border-radius: 4px;
+	box-shadow: 0 2px 6px #777;
+}
+div.tree-structure ul {
+	padding-left: 15px;
+}
+div.tree-structure li {
+	padding: 0;
+	margin: 0px;
+	user-select: none;
+	overflow: auto;
+}
+div.tree-structure li.empty {
+	padding: 4px;
+}
+div.tree-structure li.solid {
+	border: none;
+}
+div.tree-structure li div.item-container {
+	border:  1px solid #ddd;
+	border-radius: 2px;
+}
+div.tree-structure li div.item-container:hover {
+	background-color: #ddd;
+}
+div.tree-structure li div.handle {
+	cursor: move;
+	float: left;
+	background: url('../image/mini-icons.png') no-repeat 0 -80px;
+	width: 16px;
+	height: 16px;
+	margin: 2px 0;
+}
+div.tree-structure li div.label {
+	float: left;
+	margin-left: 10px;
+	margin-top: 4px;
+}
+div.tree-structure li div.action {
+	float: right;
+	margin-right: 650px;
+	margin-top: 4px;
+}
+/***********************/
+/***********************/
+/*******Data List*******/
+/***********************/
+/***********************/
+table.datalist input {
+	border: 1px solid #808080;
+}
+table.datalist select {
+	border: 1px solid #808080;
+}
+table.datalist {
+	width: 100%;
+}
+table.datalist thead tr.title-row {
+	border: 1px solid #b1b0ae;
+}
+table.datalist thead tr.filter-row {
+	border: 1px solid #b1b0ae;
+	border-bottom: none;
+}
+table.datalist thead tr.search-row {
+	border: 1px solid #b1b0ae;
+	border-top: none;
+}
+table.datalist thead th {
+    text-align: center;
+    padding: 2px 5px;
+    background-color: #e6e3e0;
+    font-weight: normal;
+}
+table.datalist thead td {
+    padding: 2px 5px;
+    background-color: #e6e3e0;
+    border: 1px solid #b1b0ae;
+}
+table.datalist thead td.search-td {
+    padding: 2px;
+}
+table.datalist thead .filter-field {
+    width: 100%;
+}
+table.datalist tbody tr {
+	background-color: #f6f2ef;
+	border: 1px solid #b1b0ae;
+	border-top: none;
+}
+table.datalist tbody tr.odd {
+	background-color: #f0f0f0;
+}
+table.datalist tbody tr.selected {
+	background-color: #e1e9eb;
+}
+table.datalist tbody tr:hover {
+	background-color: #e1e9eb;
+}
+table.datalist tbody td {
+	padding: 8px;
+}
+table.datalist tbody td a {
+	display: block;
+	float: left;
+	margin: 0 10px;
+}
+/**CONTEXT-MENU-HANDLE**/
+table.datalist tbody td.context-menu-handle-container {
+	padding: 2px;	
+}
+table.datalist tbody td div.context-menu-handle {
+	border-radius: 0 4px 4px 0;
+	padding: 8px;
+	margin-right: 2px;
+}
+ul.context-menu {
+	border-radius: 4px 0 4px 4px;
+	width: 81px;
+	position: absolute;
+	zIndex: 1;
+	top: 0px;
+	left: -80px;
+	padding-top: 2px;
+}
+ul.context-menu li {
+	margin: 1px 0;	
+}
+ul.context-menu li a {
+	padding: 5px 8px 5px 0;
+	display: block;
+	text-align: right;
+	color: white;
+}
+/**PAGE**/
+#page-TD {
+	padding: 5px;
+	float: left;
+}
+#page-TD span, #page-TD a {
+	padding: 2px 10px;
+}
+#page-TD a:hover {
+	background-color: #FFEFD5;
+}
+#page-TD span.curr {
+	color: orange;
+	font-size: larger;
+	font-weight: bold;
+}
+#page-TD span.curr {
+	color: orange;
+	font-size: larger;
+	font-weight: bold;
+}
+.search-button {
+	float: right;
+	margin: 2px;
+	border: 1px solid #BBBBBB;
+	border-radius: 4px 4px 4px 4px;
+	background-color: #EEEEEE;
+}
+.search-button .search-link {
+	display: block;
+	padding: 8px 15px;
+	width: 80px;
+	text-align: center;
+}
+/**ACTION TD**/
+.context-menu-handle {
+	text-align: center;
+	cursor: pointer;
+}
+/***********************/
+/***********************/
+/*******Form Field******/
+/***********************/
+/***********************/
+.admin_main_frame .under-desc fieldset {
+	float: left;
+	width: 38%;
+	margin-left: 1%;
+}
+.admin_main_frame .under-desc fieldset dt {
+	font-weight: bold;
+	padding-left: 5px;
+}
+.admin_main_frame .under-desc fieldset dd {
+	margin-bottom: 12px;
+}
+.admin_main_frame .under-desc fieldset.main-form {
+	width: 55%;
+	margin: 0;
+}
+.admin_main_frame .under-desc .control-buttons {
+	overflow: auto;
+}
+.admin_main_frame .under-desc .control-button {
+	padding: 4px 15px;
+	text-align: center;
+	background: #ccc;
+	color: black;
+	border: 1px solid #999;
+	display: block;
+	float: left;
+	margin: 5px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+}
+/***********************/
+/***********************/
+/**Attributeset Pattern*/
+/***********************/
+/***********************/
+.attributeset-pattern {
+	
+}
+.attributeset-pattern .attribute {
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	padding: 5px;
+	margin: 10px 0;
+	background-color: #f0f0f0;
+}
+.attributeset-pattern .attribute .action {
+	float: right;
+	padding: 3px 0;
+}
+.attributeset-pattern .attribute .title {
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
+	padding: 2px 0;
+	margin: 3px 0;
+}
+.attributeset-pattern .attribute .label {
+	padding-left: 15px;
+}
+.attributeset-pattern .attribute ul.options {
+	padding-left: 15px;
+}
+.attributeset-pattern .attribute ul.options li {
+	margin: 5px 5px 5px 0;
+	border-bottom: 1px dotted #777;
+}
+/***********************/
+/***********************/
+/******Breadcrumb*******/
+/***********************/
+/***********************/
+.brick-admin-breadcrumb {
+	padding: 10px;
+}
+.brick-admin-breadcrumb a {
+	color: #0077BB;
+}
+.brick-admin-breadcrumb span {
+	font-weight: bold;
+}
+/***********************/
+/***********************/
+/******FlashMessage*****/
+/***********************/
+/***********************/
+.brick-admin-flash-message {
+	padding: 15px;
+	margin: 5px;
+	border: 2px solid #BBEE88;
+	background-color: #aafaaa;
+}
+/***********************/
+/***********************/
+/********System*********/
+/***********************/
+/***********************/
+.section {
+	border: 1px solid #777;
+	border-radius: 4px;
+	width: 400px;
+	float: left;
+	margin: 15px 20px;
+	padding: 10px;
+	background-color: #f0f0f0;
+	box-shadow: 0 2px 6px #777;
+}
+.section .title {
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
+	padding: 5px;
+}
+.section a {
+	display: block;
+	padding: 5px;
+	margin-top: 5px;
+}
+/***********************/
+/***********************/
+/*Brick Selector********/
+/***********************/
+/***********************/
+.brick-selector-row {
+	overflow: auto;
+	border: 1px solid #777;
+	border-radius: 4px;
+	padding: 5px;
+	background-color: #eee;
+	cursor: pointer;
+	margin: 5px;
+	display: block;
+}
+.brick-selector-row:hover {
+	box-shadow: 0 0 3px #777;
+}
+.brick-selector-row .icon {
+	float: left;
+}
+.brick-selector-row .detail {
+	float: left;
+	margin-left: 5px;
+}
+.brick-selector-row .detail .ext-name {
+	font-size: larger;
+	font-weight: bold;
+	padding: 5px 0;
+}
+/***********************/
+/***********************/
+/*********Footer********/
+/***********************/
+/***********************/
+.footer {
+	font-size: smaller;
+}
+.footer .power {
+	padding: 5px;
+	float: left;
+}
+.footer .link {
+	padding: 5px;
+	float: right;	
+}
+/****************************************************/
+/**Lightbox style defination*************************/
+/****************************************************/
+#lightbox-blackbox {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 998;
+	top: 0;
+	left: 0;
+	background: black;
+	opacity: 0.5;
+	display: none;
+}
+#lightbox-whitebox {
+	position: fixed;
+	top: 15px;
+	left: 0;
+	z-index: 999;
+	display: none;
+	width: 100%;
+}
+#lightbox-whitebox .closer {
+	position: absolute;
+	top: 0px;
+	left: 97%;
+	width: 24px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+	float: none;
+	border-radius: 0 4px 4px 0;
+	box-shadow: 0 0 5px #FFF;
+	background: url('../image/closer.png') no-repeat 2px 5px white;
+	cursor: pointer;
+}
+#lightbox-whitebox .closer:hover {
+	background-color: #f0f0f0;
+}
+#lightbox-whitebox .content {
+	width: 94%;
+	min-height: 350px;
+	margin: 0 auto;
+	border: none;
+	border-radius: 4px 0 4px 4px;
+	box-shadow: 0 0 5px #FFF;
+	background: white;
+}
+#xxxg{
+	font-size:16px;
+}
+#addtable{
+	border:0px white solid;
+	color :#0077bb;
+	font-size:16px;
+}
+
+#deloption :hover{
+	text-decoration:underline;
+	cursor: pointer;
+}

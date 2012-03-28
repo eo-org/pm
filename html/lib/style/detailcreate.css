@@ -1,0 +1,53 @@
+#title{
+	text-align:center;
+	font-size:18px;
+}
+#table{
+	text-align:center;
+	font-size:16px;
+}
+#element_setting  {
+	text-align:center;
+}
+#element_setting  .zend_form{
+	border-bottom: 3px solid #AAA;
+	width:100%;
+	text-align:center;
+	font-size:15px;
+}
+#element_setting #button-element{ 
+	width:8%;
+}
+#element_setting #button-label{ 
+	width:30%;
+}
+#element_setting #button2-element{
+	width:8%;
+}
+#element_setting #bt_return-element{
+	width:8%;
+}
+#element_setting dt{
+	width:45%;
+	text-align:right;
+	
+}
+#element_setting dd{
+	width:20%;
+	text-align:left;
+}
+#element_setting dl,dd,dt{
+	margin:0 auto;
+	padding:0 auto;
+	float:left;	
+}
+#button2-label{
+ display:none;
+}
+#bt_return-label{
+ display:none;
+}
+.footer{ 
+	float:left; 
+	width:100%;
+}
