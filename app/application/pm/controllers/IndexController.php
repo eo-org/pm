@@ -6,7 +6,6 @@ class Pm_IndexController extends Zend_Controller_Action
 	{
 		$this->_form = new Form_Admin_Index();
 		$this->_tb = Class_Base::_('Users');
-		echo Class_Server::extUrl();
 	}
 	
 	public function indexAction()
@@ -39,6 +38,6 @@ class Pm_IndexController extends Zend_Controller_Action
 	public function closeAction()
 	{
 		session_destroy();
-		$this->_hepler->redirector->gotoSimple('index');
+		$this->_hepler->redirector->gotoSimple('index','index','pm');
 	}
 }
