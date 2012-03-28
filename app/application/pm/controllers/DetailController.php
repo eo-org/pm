@@ -35,6 +35,7 @@ class Pm_DetailController extends Zend_Controller_Action
 				'itemamount' => '项目金额(元)',
 				'paid' => '已付款(元)',
 				'testurl' => '测试地址',
+				'domain' => '域名',
 				'state' => '状态',
 				'~contextMenu' => '操作'
 		);
@@ -115,12 +116,14 @@ class Pm_DetailController extends Zend_Controller_Action
 								  ->from(array('d' => 'detail'),array("d.*","concat(count(distinct(b.id)),'/',count(distinct(a.id))) AS state"))
 								  ->joinLeft(array('a' => 'step'),"d.id = a.detailid",array("count(distinct(a.id))"))
 								  ->joinLeft(array('b' => 'step'),"a.detailid = b.detailid and b.state = 1",array("count(distinct(b.id))"))
+								  ->order('d.id desc')
 								  ->group('id');
 		}else{
 			$selector = $this->_tb->select(false)->setIntegrityCheck(false)
 								  ->from(array('d' => 'detail'),array("d.id","d.*","concat(count(distinct(b.id)),'/',count(distinct(a.id))) AS state"))
 								  ->joinLeft(array('a' => 'step'),"d.id = a.detailid",array("count(distinct(a.id))"))
-								  ->joinLeft(array('b' => 'step'),"a.detailid = b.detailid and b.state = 1 and b.detailid = ".$arr[0][0],array("count(distinct(b.id))"));			  
+								  ->joinLeft(array('b' => 'step'),"a.detailid = b.detailid and b.state = 1 and b.detailid = ".$arr[0][0],array("count(distinct(b.id))"))
+								  ->order('d.id desc');			  
 		}
 		$result = array();
 		foreach($this->getRequest()->getParams() as $key => $value) {

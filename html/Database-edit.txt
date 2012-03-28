@@ -1,0 +1,12 @@
+2012-03-28 
+表detail   
+添加一个字段domain（域名）
+ALTER TABLE `detail`
+ADD COLUMN `domail` VARCHAR(50);
+
+2012-03-28 
+表step
+修改两个字段类型
+ALTER TABLE `step`
+CHANGE COLUMN `starttime` `starttime` DATETIME NULL DEFAULT NULL AFTER `pathurl`,
+CHANGE COLUMN `endtime` `endtime` DATETIME NULL DEFAULT NULL AFTER `starttime`;

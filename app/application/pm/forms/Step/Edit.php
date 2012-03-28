@@ -10,6 +10,18 @@ class Form_Step_Edit extends Zend_Form
             'label' => '任务内容：',
             'required' => true
         ));
+        $db = Class_Base::_('Skill_Information');
+        $selector = $db->select(false)
+        			   ->from($db,'*');
+        $type = $db->fetchAll($selector)->toArray();
+        foreach ($type as $num => $arrone){
+        	$arrtwo[$arrone['id']] = $arrone['skillname'];
+        }
+        $this->addElement('select', 'skillid', array(
+        		'label' => '处理部门：',
+        		'required' => true,
+        		'multiOptions' => $arrtwo
+        ));
         $this->addElement('textarea', 'assess', array(
             'filters' => array('StringTrim'),
             'label' => '点评：'

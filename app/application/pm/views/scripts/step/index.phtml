@@ -5,21 +5,23 @@
   </tr>
   <tr align="center">
   	<td height="35">项目名称</td>
-  	<td colspan="2">联系方式</td>
+  	<td>联系方式</td>
   	<td>项目类型</td>
   	<td>项目金额</td>
   	<td>已付金额</td>
   	<td>测试地址</td>
+  	<td>域名</td>
   	<td>状态</td>
   	<td>操作</td>
   </tr>
   <tr id="detailinformation" align="center">
   	<td height="35"><?php echo $this->detailrow['projectname'];?></td>
-  	<td colspan="2"><?php echo $this->detailrow['contact'];?></td>
+  	<td><?php echo $this->detailrow['contact'];?></td>
   	<td><?php echo $this->detailrow['type'];?></td>
   	<td><?php echo $this->detailrow['itemamount'];?></td>
   	<td><?php echo $this->detailrow['paid'];?></td>
   	<td><?php echo $this->detailrow['testurl'];?></td>
+  	<td><?php echo $this->detailrow['domain'];?></td>
   	<td><?php echo $this->detailrow['state'];?></td>
   	<td><a href='/pm/detail/edit/id/<?php echo $this->detailrow['id'];?>'>编辑</a>
   	&nbsp;&nbsp;<a href='/pm/detail/del/id/<?php echo $this->detailrow['id'];?>'>删除</a></td>
@@ -61,7 +63,7 @@
   <input id="detailid" type="hidden" value="<?php echo $this->deid;?>">
   <table id="add" width="15%" style="font-size:16px;" >
 	  <tr align="right">
-	  	<td><a id ="addstep" href="#">添加步骤</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id ="submitstep" href="">确定</a>&nbsp;&nbsp;</td>
+	  	<td><a id ="addstep" href="#">添加步骤</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id ="submitstep">确定</a>&nbsp;&nbsp;</td>
 	  </tr>
   </table>
 <script type="text/javascript">
@@ -101,7 +103,7 @@ $('#submitstep').click(function(){
 		type: "POST",
 		url: '/pm/step/create/id/'+id+'/val/'+attrValue+'/selval/'+selvalue,
 		success: function(obj) {	
-				
+			window.location.href='/pm/step/index/id/'+id;	
 		}
 	});
 });

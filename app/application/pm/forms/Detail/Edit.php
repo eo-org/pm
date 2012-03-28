@@ -39,6 +39,10 @@ class Form_Detail_Edit extends Zend_Form
        		'filters' => array('StringTrim'),
        		'label' => '测试地址：'
        ));
+       $this->addElement('text', 'domain', array(
+       		'filters' => array('StringTrim'),
+       		'label' => '域名：'
+       ));
        $this->addElement('submit', 'button', array(
        		'filters' => array('StringTrim'),
        		'label' => '提交',
