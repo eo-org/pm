@@ -1,4 +1,6 @@
 <?php
+require CONTAINER_PATH.'/app/application/pm/forms/Step/Edit.php';
+require CONTAINER_PATH.'/app/application/pm/forms/Step/Distribution.php';
 class Pm_StepController extends Zend_Controller_Action
 {
 	private $_tb;
@@ -43,7 +45,6 @@ class Pm_StepController extends Zend_Controller_Action
 	public function distributionAction()
 	{
 		$id = $this->getRequest()->getParam('id');
-		require CONTAINER_PATH.'/app/application/pm/forms/step/Distribution.php';
 		$form = new Form_Step_Distribution($id);
 		$row = $this->_tb->find($id)->current();
 		$arrrow = $row->toArray();
@@ -81,7 +82,6 @@ class Pm_StepController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/step/Edit.php';
 		$form = new Form_Step_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$deid = $this->getRequest()->getParam('deid');

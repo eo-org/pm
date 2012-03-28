@@ -53,10 +53,6 @@ class Form_Users_Edit extends Zend_Form
        		'MultiOptions' => $arrtwo,
             'required' => true
        ));
-       $this->addElement('textarea', 'remarks', array(
-       		'filters' => array('StringTrim'),
-       		'label' => '简介：'
-       ));
        $this->addElement('submit', 'button', array(
        		'filters' => array('StringTrim'),
        		'label' => '提交',

@@ -1,4 +1,5 @@
 <?php
+require CONTAINER_PATH.'/app/application/pm/forms/Detail/Edit.php';
 class Pm_DetailController extends Zend_Controller_Action
 {
 	private $_tb;
@@ -64,7 +65,6 @@ class Pm_DetailController extends Zend_Controller_Action
 	
 	public function createAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/detail/Edit.php';
 		$form = new Form_Detail_Edit();
 		$tb = Class_Base::_('Typestep');
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
@@ -161,7 +161,6 @@ class Pm_DetailController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/detail/Edit.php';
 		$form = new Form_Detail_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current();

@@ -2,8 +2,8 @@
 <div id='table'>员工信息添加表</div><br>
 <script type="text/javascript">
 $(document).ready(function() { 
-	$('#remarks').attr("cols","25");
-	$('#remarks').attr("rows","3");
+	$('#remarks-element #remarks').attr("cols","25");
+	$('#remarks-element #remarks').attr("rows","3");
 	$("#username-element #username").after("<div id='nametsy' style='color:#f00;float:left;width:260px;'></div>");
 	$('#username-element #username').blur(function(){
 		var uname = $(this).val();
@@ -22,8 +22,15 @@ $(document).ready(function() {
 	});
 	$('#username-element #loginname').live("blur",function(){
 		var readonly = $(this).attr('readonly');
+		var uname = $(this).val();
 		if(readonly != "readonly"){
-			alert(1);
+			$.ajax({
+				type: "POST",
+				url: '/pm/users/selusername/uname/'+uname,
+				success: function(obj) {	
+					$("#username-element #nametsy").html(unescape(obj));				
+				}
+			});
 		}	
 	});
 });

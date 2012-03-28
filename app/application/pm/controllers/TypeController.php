@@ -1,5 +1,4 @@
 <?php
-require APP_PATH.'/pm/forms/type/Edit.php';
 class Pm_TypeController extends Zend_Controller_Action
 {
 	private $_tb;
@@ -9,6 +8,7 @@ class Pm_TypeController extends Zend_Controller_Action
 		if(!isset($_SESSION['USERNAME'])){
 			$this->_redirect('/pm/index/');
 		}
+		require APP_PATH.'/pm/forms/type/Edit.php';
 		$this->_form = new Form_Type_Edit();
 		$this->_tb = Class_Base::_('Detail_Type');
 	}

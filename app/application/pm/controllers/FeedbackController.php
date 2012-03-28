@@ -16,7 +16,6 @@ class Pm_FeedbackController extends Zend_Controller_Action
 						 ->from(array('f'=>'feedback'),'*')
 						 ->joinLeft(array('d'=>'detail'),"f.detailid = d.id",array('id as deid','projectname'))
 						 ->where('f.detailid = ?',$id);
-// 		echo $selector;exit;
 		$row = $this->_tb->fetchAll($selector)->toArray();
 		$this->_helper->template->head('客户反馈意见详情列表');
 		$this->_helper->template->actionMenu(array(
@@ -51,7 +50,6 @@ class Pm_FeedbackController extends Zend_Controller_Action
 	{
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current()->toArray();
-// 		Zend_Debug::dump($row);
 		if($this->getRequest()->isPost() ) {
 	    	$datetime = $this->getRequest()->getParam('datetime');
 	    	$proposal = $this->getRequest()->getParam('proposal');

@@ -1,4 +1,6 @@
 <?php
+require CONTAINER_PATH.'/app/application/pm/forms/Users/Edit.php';
+require CONTAINER_PATH.'/app/application/pm/forms/Users/User.php';
 class Pm_UsersController extends Zend_Controller_Action
 {
 	private $_tb;
@@ -27,8 +29,6 @@ class Pm_UsersController extends Zend_Controller_Action
 	
 	public function createAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/users/Edit.php';
-		require CONTAINER_PATH.'/app/application/pm/forms/users/User.php';
 		$form = new Form_Users_Edit();
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 			$arr = $form->getValues();
@@ -126,8 +126,6 @@ class Pm_UsersController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/users/Edit.php';
-		require CONTAINER_PATH.'/app/application/pm/forms/users/User.php';
 		$form = new Form_Users_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current();
@@ -140,6 +138,7 @@ class Pm_UsersController extends Zend_Controller_Action
 		$html = $form->populate($row->toArray());
 		if($this->getRequest()->isPost() && $html->isValid($this->getRequest()->getParams()) ) {
 			$arr = $html->getValues();
+			$loginname = $this->getRequest()->getParam('loginname');
 			foreach ($arr as $num => $arrone){
 				if($num != 'skill'){
 					$arruser[$num] = $arrone;
@@ -156,8 +155,6 @@ class Pm_UsersController extends Zend_Controller_Action
 				);
 				$tb->insert($arrskill);
 			}
-			$User = new Form_Users_User();
-			$loginname =  strtolower($User->getInitials($arr['username']));
 			$arrthree = array(
 					'loginname' => $loginname,
 					'passwd' => '123456'
@@ -172,7 +169,6 @@ class Pm_UsersController extends Zend_Controller_Action
 	
 	public function selusernameAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/users/User.php';
 		$User = new Form_Users_User();
 		$uname = $this->getRequest()->getParam('uname');
 		$loginname =  strtolower($User->getInitials($uname));
@@ -183,7 +179,7 @@ class Pm_UsersController extends Zend_Controller_Action
 				  ->where('loginname = ?',$loginname);
 		$row = $tb->fetchRow($sql);
 		if(!empty($row)){
-			$aa = "用户登陆账号:<input id='loginname' type='text' value='".$row['loginname']."' name='loginname' />";
+			$aa = "用户登陆账号:<input id='loginname' type='text' value='".$row['loginname']."' name='loginname' style='ime-mode:disabled;' />";
 			$aa.= "<div id='pd' style='float:right;'>×</div><div id='jl' style='float:left;'>该账号已被".$row['username']."使用</div>";
 		}else{
 			$aa = "用户登陆账号:<input id='loginname' readonly='readonly' type='text' value='".$loginname."' name='loginname' />";

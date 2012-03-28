@@ -1,4 +1,5 @@
 <?php
+require CONTAINER_PATH.'/app/application/pm/forms/Schedule/Edit.php';
 class Pm_ScheduleController extends Zend_Controller_Action
 {
 	private $_tb;
@@ -48,13 +49,10 @@ class Pm_ScheduleController extends Zend_Controller_Action
 				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail'),
 				array('label' => '项目类型管理', 'href' => '/pm/type/index/', 'method' => 'ManagementType'),
 				array('label' => '类型添加', 'href' => '/pm/type/create/', 'method' => 'CreateType')));
-// 		$this->_helper->template->actionMenu(array(
-// 				array('label' => '创建新项目', 'href' => '/project/detail/create/', 'method' => 'createElementSetting')));
 	}
 	
 	public function createAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/detail/Edit.php';
 		$form = new Form_Detail_Edit();
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 			$this->_tb->insert($form->getValues());
@@ -76,8 +74,6 @@ class Pm_ScheduleController extends Zend_Controller_Action
 						 ->joinLeft(array('s'=>'schedule'),"s.stepid = t.id and s.detailid = ".$id, array('id','programmer','percentage','pathurl','assess'))
 						 ->where('typeid = ?',$row['type']);
 		$rowset = $step->fetchAll($selector)->toArray();
-// 		Zend_Debug::dump($rowset);
-// 		exit;
 		$result = array();
 		foreach($this->getRequest()->getParams() as $key => $value) {
 			if(substr($key, 0 , 7) == 'filter_') {
@@ -116,7 +112,6 @@ class Pm_ScheduleController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/schedule/Edit.php';
 		$form = new Form_Schedule_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$row = $this->_tb->find($id)->current();

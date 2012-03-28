@@ -1,4 +1,5 @@
 <?php
+require CONTAINER_PATH.'/app/application/pm/forms/Individual/Edit.php';
 class Pm_IndividualController extends Zend_Controller_Action
 {
 	private $_schedule;
@@ -105,7 +106,6 @@ class Pm_IndividualController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
-		require CONTAINER_PATH.'/app/application/pm/forms/individual/Edit.php';
 		$form = new Form_Individual_Edit();
 		$id = $this->getRequest()->getParam('id');
 		$tb = Class_Base::_('Step');
