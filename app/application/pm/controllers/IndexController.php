@@ -38,6 +38,7 @@ class Pm_IndexController extends Zend_Controller_Action
 	public function closeAction()
 	{
 		session_destroy();
-		$this->_hepler->redirector->gotoSimple('index','index','pm');
+		//$this->_hepler->redirector->gotoSimple('index','index','pm');
+		$this->_redirect('/pm/index/index');
 	}
 }
