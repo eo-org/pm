@@ -6,7 +6,7 @@ class Pm_IndividualController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/pm/admin/');
+			$this->_redirect('/pm/index/');
 		}
 		$this->_Digits = new Zend_Filter_Digits();
 	}

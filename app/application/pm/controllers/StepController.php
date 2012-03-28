@@ -5,7 +5,7 @@ class Pm_StepController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/pm/admin/');
+			$this->_redirect('/pm/index/');
 		}
 		$this->_tb = Class_Base::_('Step');
 	}

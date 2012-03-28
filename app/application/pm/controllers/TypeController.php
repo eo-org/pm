@@ -7,7 +7,7 @@ class Pm_TypeController extends Zend_Controller_Action
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/pm/admin/');
+			$this->_redirect('/pm/index/');
 		}
 		$this->_form = new Form_Type_Edit();
 		$this->_tb = Class_Base::_('Detail_Type');
