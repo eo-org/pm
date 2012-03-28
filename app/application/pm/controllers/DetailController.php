@@ -59,7 +59,6 @@ class Pm_DetailController extends Zend_Controller_Action
 		$this->view->type = $type;
 		$this->view->partialHTML = $partialHTML;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目管理', 'href' => '/pm/detail/index/', 'method' => 'ManagementDetail'),
 				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail')));
 	}
 	
