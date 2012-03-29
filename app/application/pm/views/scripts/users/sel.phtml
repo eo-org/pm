@@ -1,7 +1,7 @@
 
 <?php $i=1;$j=1;?>
-<div id="detail" style="BACKGROUND:transprant;overflow:auto;width:25%;height:200px;border:1px solid #000;font-size:16px;float:left;" align=left>
-处理的项目：
+<div id="detail" style="BACKGROUND:transprant;overflow:auto;width:35%;height:200px;border:1px solid #000;font-size:16px;float:left;" align=left>
+<br>处理的项目：
 <ul id="seldetail">
 <?php if($this->if == 1){?>
 	<?php foreach ($this->rowdetail as $num => $arrone){?>
@@ -12,8 +12,8 @@
 <?php }else{echo '&nbsp;&nbsp;暂无处理项目!';}?>
 </ul>
 </div>
-<div id="step" style="BACKGROUND:transprant;overflow:auto;width:30%;height:200px;border:1px solid #000;font-size:16px;float:left;margin-left:1%" align=left>
-处理项目的步骤
+<div id="step" style="BACKGROUND:transprant;overflow:auto;width:35%;height:200px;border:1px solid #000;font-size:16px;float:left;margin-left:1%" align=left>
+<br>处理项目的步骤
 <ul id="selstep">
 <?php if($this->if == 1){?>
 	<?php foreach ($this->rowstep as $num => $arrone){?>

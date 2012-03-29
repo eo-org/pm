@@ -24,7 +24,8 @@ class Pm_UsersController extends Zend_Controller_Action
 		$this->view->seldetail = $this->seldetailAction();
 		$this->_helper->template->actionMenu(array(
 				array('label' => '员工详情管理', 'href' => '/pm/users/index/', 'method' => 'ManagementDetail'),
-				array('label' => '员工添加', 'href' => '/pm/users/create/', 'method' => 'CreateDetail')));
+				array('label' => '员工添加', 'href' => '/pm/users/create/', 'method' => 'CreateDetail'),
+				array('label' => '部门管理', 'href' => '/pm/department/index/', 'method' => 'CreateDetail')));
 	}
 	
 	public function createAction()

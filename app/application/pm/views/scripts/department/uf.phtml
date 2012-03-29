@@ -1,0 +1,13 @@
+<?php $i=1;?>
+<div id="detail" style="BACKGROUND:transprant;overflow:auto;width:35%;height:200px;border:1px solid #000;font-size:16px;float:left;" align=left>
+<br>部门人员：
+<ul id="seldetail">
+<?php if(!empty($this->rowskill)){?>
+	<?php foreach ($this->rowskill as $num => $arrone){?>
+	<li>
+		&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $i."、".$arrone['username'];?>
+	</li>
+<?php $i++; }?>
+<?php }else{echo '&nbsp;&nbsp;暂无人员!';}?>
+</ul>
+</div>
