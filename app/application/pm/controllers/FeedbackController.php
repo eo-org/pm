@@ -16,13 +16,14 @@ class Pm_FeedbackController extends Zend_Controller_Action
 						 ->from(array('f'=>'feedback'),'*')
 						 ->joinLeft(array('d'=>'detail'),"f.detailid = d.id",array('id as deid','projectname'))
 						 ->where('f.detailid = ?',$id);
-		$row = $this->_tb->fetchAll($selector)->toArray();
+		$row = $this->_tb->fetchAll($selector);
 		$this->_helper->template->head('客户反馈意见详情列表');
 		$this->_helper->template->actionMenu(array(
 				array('label' => '项目步骤', 'href' => '/pm/step/index/id/'.$id, 'method' => 'detailstep'),
 				array('label' => '反馈意见', 'href' => '/pm/feedback/index/id/'.$id, 'method' => 'feedback'),
 				array('label' => '反馈意见添加', 'href' => '/pm/feedback/create/id/'.$id, 'method' => 'Createfeedback')));
 		if(!empty($row)){
+			$row = $row->toArray();
 			$this->view->projectname = $row[0]['projectname'];
 			$this->view->deid = $row[0]['deid'];
 			$this->view->row = $row;	

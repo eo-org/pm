@@ -6,6 +6,10 @@ class Pm_IndexController extends Zend_Controller_Action
 	{
 		$this->_form = new Form_Admin_Index();
 		$this->_tb = Class_Base::_('Users');
+		$selector = $this->_tb->select(false)
+							  ->from($this->_tb, '*');
+		$rowset = $this->_tb->fetchAll($selector)->toArray();
+		var_export($rowset);
 	}
 	
 	public function indexAction()
