@@ -17,8 +17,9 @@ class Pm_IndexController extends Zend_Controller_Action
 							 ->from($this->_tb, '*')
 							 ->where('loginname = ?',$arrin['username'])
 				 			 ->where('passwd = ?',$arrin['passwd']);
-			$rowset = $this->_tb->fetchRow($selector)->toArray();
+			$rowset = $this->_tb->fetchRow($selector);
 			if(!empty($rowset)){
+				$rowset = $rowset->toArray();
 				$tb = Class_Base::_('Users_Information');
 				$sql = $tb->select(false)
 						  ->from($tb,array('username'))

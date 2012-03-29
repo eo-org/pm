@@ -17,8 +17,11 @@ class Pm_DepartmentController extends Zend_Controller_Action
 						 ->from(array('i' => 'skill_information'),'*')
 						 ->joinLeft(array('s' => 'skill'),"i.id = s.skillid ",array('count(s.userid) as num'))
 						 ->group('i.id');
-		$row = $this->_tb->fetchAll($selector)->toArray();
-		$this->sid = $row[0]['id'];
+		$row = $this->_tb->fetchAll($selector);
+		if(!empty($row)){
+			$row = $row->toArray();
+			$this->sid = $row[0]['id'];
+		}
 		$this->view->row = $row;
 		$this->view->usersinformation = $this->ufAction();
 		$this->_helper->template->actionMenu(array(
