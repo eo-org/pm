@@ -7,9 +7,9 @@ class Pm_UsersController extends Zend_Controller_Action
 	private $uid;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/pm/index/');
-		}
+// 		if(!isset($_SESSION['USERNAME'])){
+// 			$this->_redirect('/pm/index/');
+// 		}
 		$this->_tb = Class_Base::_('Users_Information');
 	}
 	public function indexAction()
@@ -47,8 +47,7 @@ class Pm_UsersController extends Zend_Controller_Action
 				);
 				$tb->insert($arrskill);
 			}
-			$User = new Form_Users_User();
-			$loginname =  strtolower($User->getInitials($arr['username']));
+			$loginname = $this->getRequest()->getParam('loginname');
 			$arrthree = array(
 					'username' => $id,
 					'loginname' => $loginname,
