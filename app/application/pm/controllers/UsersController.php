@@ -7,9 +7,9 @@ class Pm_UsersController extends Zend_Controller_Action
 	private $uid;
 	public function init()
 	{
-// 		if(!isset($_SESSION['USERNAME'])){
-// 			$this->_redirect('/pm/index/');
-// 		}
+		if(!isset($_SESSION['USERNAME'])){
+			$this->_redirect('/pm/index/');
+		}
 		$this->_tb = Class_Base::_('Users_Information');
 	}
 	public function indexAction()
