@@ -30,17 +30,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $controller->setControllerDirectory(array(
             'default' => APP_PATH.'/default/controllers',
         	'admin' => APP_PATH.'/admin/controllers',
-        	'pm' => APP_PATH.'/pm/controllers',
         	'rest' => APP_PATH.'/rest/controllers'
         ));
         
-        $csu = Class_Session_User::getInstance();
-        $controller->registerPlugin(new App_Plugin_BackendSsoAuth(
-        	$csu,
-        	Class_Server::getSiteUrl().'/admin',
-        	'service-pm',
-        	Class_Server::API_KEY
-        ));
+//         $csu = Class_Session_User::getInstance();
+//         $controller->registerPlugin(new App_Plugin_BackendSsoAuth(
+//         	$csu,
+//         	Class_Server::getSiteUrl().'/admin',
+//         	'service-pm',
+//         	Class_Server::API_KEY
+//         ));
         
         $controller->throwExceptions(true);
         Zend_Layout::startMvc();
