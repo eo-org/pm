@@ -14,7 +14,7 @@
   </tr>
   <?php foreach ($row as $num => $arrone){?>
   <tr align="center" valign="middle" id="information" class='<?php echo $arrone['id'];?>' >
-    <td height="44" id="userid" style="color:<?php if($num==0){echo "#F00";}else{echo "#333";}?>;" class="<?php echo $arrone['id'];?>"><?php echo $arrone['username']?></td>
+    <td height="44" id="userid" style="color:<?php if($num==0){echo "#F00";}else{echo "#333";}?>;" class="<?php echo $arrone['id'];?>"><?php echo $arrone['userName']?></td>
     <td><?php if($arrone['sex']==1){echo '男';}else{echo '女';}?></td>
     <td><?php echo $arrone['age']?></td>
     <td><?php echo $arrone['QQ']?></td>

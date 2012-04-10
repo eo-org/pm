@@ -2,7 +2,7 @@
   <tr>
     <td height="32" colspan="4">
     	<div id='title'>福网互联科技有限公司</div><input type="hidden" value="<?php echo $this->deid;?>" id="deid"> <br>
-		<div id='table'>项目<font color="#f00"><?php echo $this->projectname;?></font>客户反馈意见表</div><br></td>
+		<div id='table'>项目<font color="#f00"><?php echo $this->projectName;?></font>客户反馈意见表</div><br></td>
   </tr>
   <tr>
     <td height="32" align="center">时间</td>
@@ -13,11 +13,11 @@
   <?php if(empty($this->row)){echo "<tr><td height='32' align='center'>暂无反馈意见</td><td colspan='3'>&nbsp;</td></tr>";}else{?>
   <?php foreach ($this->row as $num => $arrone){?>
   <tr align="center">
-    <td height="32"><?php echo $arrone['datetime']?></td>
+    <td height="32"><?php echo $arrone['feedbackTime']?></td>
     <td><?php echo $arrone['pathurl'];?></td>
     <td><?php echo $arrone['proposal'];?></td>
     <td><a id="editfeedback" href="/pm/feedback/edit/id/<?php echo $arrone['id'];?>">修改</a>
-    &nbsp;&nbsp;<a id="editfeedback" href="/pm/feedback/del/deid/<?php echo $arrone['detailid'];?>/id/<?php echo $arrone['id'];?>">删除</a></td>
+    &nbsp;&nbsp;<a id="editfeedback" href="/pm/feedback/del/deid/<?php echo $arrone['detailId'];?>/id/<?php echo $arrone['id'];?>">删除</a></td>
   </tr>
   <?php }}?>
   <tr>

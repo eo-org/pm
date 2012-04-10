@@ -29,7 +29,7 @@
   </tr>
   <tr>
     <td height="42" align="right">部门：</td>
-    <td colspan="3" id='selskill'><?php foreach ($rowset as $num => $arrone){ echo $arrone['skillname']."&nbsp;&nbsp;";}?></td>
+    <td colspan="3" id='selskill'><?php foreach ($rowset as $num => $arrone){ echo $arrone['skillName']."&nbsp;&nbsp;";}?></td>
   </tr>
   <tr>
     <td height="42" colspan="4" align="center" id="operating">
@@ -62,17 +62,17 @@ $(document).ready(function() {
 		$("#selphone").html(unescape(selphone));
 		var selskill = "";
 		<?php foreach ($this->skillinformation as $num => $arrtwo){?>
-			selskill+= "<input name='skill' type='checkbox' id='<?php echo $arrtwo['id'];?>'> <?php echo $arrtwo['skillname'];?>";
+			selskill+= "<input name='skill' type='checkbox' id='<?php echo $arrtwo['id'];?>'> <?php echo $arrtwo['skillName'];?>";
 		<?php }?>
 		$("#selskill").html(unescape(selskill));
 		<?php foreach ($rowset as $num => $arrthree){?>
-			$('#selskill #<?php echo $arrthree['skillid'];?>').attr("checked","checked");
+			$('#selskill #<?php echo $arrthree['skillId'];?>').attr("checked","checked");
 		<?php }?>
 		var operating = "<input type='button' id='submituser' value='确定' /><input type='button' id='return' value='返回' />";
 		$("#operating").html(unescape(operating));
 	});
 	$('#return').live('click',function(){
-		var table = "<tr><td width='20%' height='42' align='right'>姓名：</td><td width='15%' id='selname'><?php echo $row['username'];?></td>";
+		var table = "<tr><td width='20%' height='42' align='right'>姓名：</td><td width='15%' id='selname'><?php echo $row['userName'];?></td>";
 		table+= "<td colspan='2' rowspan='3' style='vertical-align:top;' id='img' >&nbsp;&nbsp;";
 		table+= "&nbsp;&nbsp;<img src='/uploadimg/img_6.jpg' width='100px' height='100px' /><div id='loadfile' style='overflow:hidden;position:absolute'>";
 		table+= "<input type='file' id='file' size='1' style='position:absolute;z-index:100;margin-left:-180px;font-size:60px;opacity:0;filter:alpha(opacity=0);' >";
@@ -82,7 +82,7 @@ $(document).ready(function() {
 		table+= "</tr> <tr><td height='42' align='right'>QQ：</td><td id='selQQ'><?php echo $row['QQ'];?></td>";
 		table+= "<td width='4%' align='right'>电话：</td><td width='17%' id='selphone'><?php echo $row['phone'];?></td>";
 		table+= "</tr><tr><td height='42' align='right'>部门：</td><td colspan='3' id='selskill'>";
-		table+= "<?php foreach ($rowset as $num => $arrone){ echo $arrone['skillname'].'&nbsp;&nbsp;';}?></td>";
+		table+= "<?php foreach ($rowset as $num => $arrone){ echo $arrone['skillName'].'&nbsp;&nbsp;';}?></td>";
 		table+= "</tr><tr><td height='42' colspan='4' align='center' id='operating'><input type='button' name='button' id='editinformation' value='修改信息' />";
 		table+= "<input type='button' name='button' id='editpassword' value='修改密码' /></td></tr>";
 		$("#userinformation").html(unescape(table));

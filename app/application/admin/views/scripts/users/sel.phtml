@@ -6,7 +6,7 @@
 <?php if($this->if == 1){?>
 	<?php foreach ($this->rowdetail as $num => $arrone){?>
 	<li id="<?php echo $arrone['id'];?>" class='detail' <?php if($i == 1){?>style="color: #F00"<?php }?>>
-		<?php echo $i."、".$arrone['projectname'];?>
+		<?php echo $i."、".$arrone['projectName'];?>
 	</li>
 <?php $i++; }?>
 <?php }else{echo '&nbsp;&nbsp;暂无处理项目!';}?>
@@ -19,11 +19,11 @@
 	<?php foreach ($this->rowstep as $num => $arrone){?>
 	<li  id="<?php echo $arrone['id'];?>">
 		<?php $selstep = $j."、".$arrone['content'].'(';
-			if($arrone['userid']!=''){
-				if($this->uid == $arrone['userid']){
-					$selstep.='被'.$arrone['busername'].'委托、';
+			if($arrone['userId']!=''){
+				if($this->uid == $arrone['userId']){
+					$selstep.='被'.$arrone['buserName'].'委托、';
 				}else {
-					$selstep.='委托给'.$arrone['username'].'、';
+					$selstep.='委托给'.$arrone['userName'].'、';
 				}
 			} 
 			if($arrone['state']==0){
@@ -41,7 +41,7 @@
 <script type="text/javascript">
 $('#seldetail .detail').click(function(){
 	var did = $(this).attr('id');
-	$('#detail #seldetail #<?php echo $this->detailid;?>').attr('style','color:#333');
+	$('#detail #seldetail #<?php echo $this->detailId;?>').attr('style','color:#333');
 	$("#detail #seldetail .font").attr('style','color:#333');
 	$("#detail #seldetail #"+did).attr('style','color:#F00');
 	$("#detail #seldetail #"+did).attr('class','font');

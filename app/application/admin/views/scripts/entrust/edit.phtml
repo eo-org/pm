@@ -11,7 +11,7 @@
   </tr>
   <tr>
     <td height="40" align="right">项目名称：</td>
-    <td><?php echo $arrone['projectname'];?></td>
+    <td><?php echo $arrone['projectName'];?></td>
   </tr>
   <tr>
     <td height="40" align="right">步骤名称：</td>
@@ -25,7 +25,7 @@
     <td height="40" align="right">委托人：</td>
     <td><select name="userid" id="userid">
     	<?php foreach($this->userrow as $num => $arrtwo){?>
-      		<option value='<?php echo $arrtwo['userid'];?>' <?php if($arrone['userid']==$arrtwo['userid']){echo "selected='selected'";}?>><?php echo $arrtwo['username'];?></option>
+      		<option value='<?php echo $arrtwo['userId'];?>' <?php if($arrone['userId']==$arrtwo['userId']){echo "selected='selected'";}?>><?php echo $arrtwo['userName'];?></option>
       	<?php }?>
     </select>
     </td>

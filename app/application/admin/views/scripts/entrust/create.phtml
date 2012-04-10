@@ -14,7 +14,7 @@
     <td height="35" align="right">经理确认：</td>
     <td><select name="personname" id="personname">
     	<?php foreach ($this->userrow as $num => $arrone){?>
-      		<option value="<?php echo $arrone['id'];?>"><?php echo $arrone['username']?></option>
+      		<option value="<?php echo $arrone['id'];?>"><?php echo $arrone['userName']?></option>
       	<?php }?>
    		</select></td>
   </tr>
@@ -22,7 +22,7 @@
     <td height="35" align="right">委托人员：</td>
     <td><select name="userid" id="userid">
     	<?php foreach ($this->rowset as $num => $arrtwo){?>
-      		<option value="<?php echo $arrtwo['userid'];?>"><?php echo $arrtwo['username']?></option>
+      		<option value="<?php echo $arrtwo['userId'];?>"><?php echo $arrtwo['userName']?></option>
       	<?php }?>
    		</select></td>
   </tr>

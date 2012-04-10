@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$('#remarks').attr("cols","25");
 	$('#remarks').attr("rows","3");
 	<?php foreach ($this->rowset as $num => $arrone){?>
-		$('#skill-element #skill-<?php echo $arrone['skillid'];?>').attr("checked","checked");
+		$('#skill-element #skill-<?php echo $arrone['skillId'];?>').attr("checked","checked");
 	<?php }?>
 });
 </script>

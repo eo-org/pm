@@ -16,13 +16,13 @@
   	<td>操作</td>
   </tr>
   <tr id="detailinformation" align="center">
-  	<td height="35"><?php echo $this->detailrow['detime'];?></td>
-  	<td><?php echo $this->detailrow['projectname'];?></td>
+  	<td height="35"><?php echo $this->detailrow['detailTime'];?></td>
+  	<td><?php echo $this->detailrow['projectName'];?></td>
   	<td><?php echo $this->detailrow['contact'];?></td>
   	<td><?php echo $this->detailrow['type'];?></td>
   	<td><?php echo $this->detailrow['itemamount'];?></td>
   	<td><?php echo $this->detailrow['paid'];?></td>
-  	<td><?php echo $this->detailrow['testurl'];?></td>
+  	<td><?php echo $this->detailrow['testUrl'];?></td>
   	<td><?php echo $this->detailrow['domain'];?></td>
   	<td><?php echo $this->detailrow['state'];?></td>
   	<td><a href='/pm/detail/edit/id/<?php echo $this->detailrow['id'];?>'>编辑</a>
@@ -45,7 +45,7 @@
 	  <?php if($arrone['entrustid']!=''){ ?>
 		   <tr align="center" >
 		    <td style="vertical-align:middle;" height="32"><?php echo $arrone['content'];?></td>
-		    <td style="vertical-align:middle;"><?php echo $arrone['username'];?></td>
+		    <td style="vertical-align:middle;"><?php echo $arrone['userName'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['percentage'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2" colspan='2'><?php 
 			    $arrbox = explode("&", $arrone['pathurl']);
@@ -53,8 +53,8 @@
 			    	echo $arrbox[$i]."<br>";
 			    }
 		    ?></td>
-		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['starttime'];?></td>
-		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['endtime'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['startTime'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['endTime'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['assess']?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){?><a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
@@ -62,12 +62,12 @@
 		  </tr>
 		  <tr align="center" >
 		    <td height="32" style="color:#f00;vertical-align:middle;">┗━委托☞</td>
-		    <td style="vertical-align:middle;"><?php echo $arrone['entrustname'];?></td>
+		    <td style="vertical-align:middle;"><?php echo $arrone['entrustName'];?></td>
 		  </tr>
 	 <?php }else {?>
 	 	<tr align="center" valign="middle">
 	    <td height="32" style="vertical-align:middle;"><?php echo $arrone['content']?></td>
-	    <td style="vertical-align:middle;"><?php echo $arrone['username']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['userName']?></td>
 	    <td style="vertical-align:middle;"><?php echo $arrone['percentage']?></td>
 	    <td style="vertical-align:middle;" colspan='2'><?php 
 		    $arrbox = explode("&", $arrone['pathurl']);
@@ -75,8 +75,8 @@
 		    	echo $arrbox[$i]."<br>";
 		    }
 	    ?></td>
-	    <td style="vertical-align:middle;"><?php echo $arrone['starttime']?></td>
-	    <td style="vertical-align:middle;"><?php echo $arrone['endtime']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['startTime']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['endTime']?></td>
 	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
 	    <td style="vertical-align:middle;"><?php echo $arrone['assess']?></td>
 	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){?><a href='/pm/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
@@ -98,7 +98,7 @@ $('#addstep').click(function(){
 	var aa="<tr id=s"+i+" align='center'><td><input type='text' value=''/></td>";
 	aa+="<td align='left'><select id='skillid"+i+"' class='seltype'>";
 	<?php foreach ($this->selrow as $num => $arrtwo){?>
-	aa+="<option value='<?php echo $arrtwo['id'];?>'><?php echo $arrtwo['skillname']?></option>";
+	aa+="<option value='<?php echo $arrtwo['id'];?>'><?php echo $arrtwo['skillName']?></option>";
 	<?php }?>
 	aa+="</select>";
 	aa+="&nbsp;<input id='deloption' type='button' value='删除' class=s"+i+"></td><td height='32' colspan='7'>&nbsp;</td></tr>";

@@ -14,9 +14,9 @@
   <?php foreach ($this->rowset as $num => $arrone){?>
   <?php if($arrone['entrustid']!=''){ ?>
 		   <tr align="center" >
-		    <td height="64" style="vertical-align:middle;" rowspan="2"><a href='/pm/detail/index/id/<?php echo $arrone['detailid'];?>'><?php echo $arrone['projectname']?></a></td>
+		    <td height="64" style="vertical-align:middle;" rowspan="2"><a href='/pm/detail/index/id/<?php echo $arrone['detailId'];?>'><?php echo $arrone['projectName']?></a></td>
 		    <td style="vertical-align:middle;"><?php echo $arrone['content'];?></td>
-		    <td style="vertical-align:middle;"><?php echo $arrone['username'];?></td>
+		    <td style="vertical-align:middle;"><?php echo $arrone['userName'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['percentage'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php 
 			    $arrbox = explode("&", $arrone['pathurl']);
@@ -24,21 +24,21 @@
 			    	echo $arrbox[$i]."<br>";
 			    }
 		    ?></td>
-		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['starttime'];?></td>
-		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['endtime'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['startTime'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['endTime'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['assess']?></td>
-		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['userid'] == $_SESSION['USERID']){?><a href='/pm/individual/edit/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;<?php }?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['userId'] == $_SESSION['USERID']){?><a href='/pm/individual/edit/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;<?php }?></td>
 		  </tr>
 		  <tr align="center" >
 		    <td height="32" style="color:#f00;vertical-align:middle;">┗━委托☞</td>
-		    <td style="vertical-align:middle;"><?php echo $arrone['entrustname'];?></td>
+		    <td style="vertical-align:middle;"><?php echo $arrone['entrustName'];?></td>
 		  </tr>
 	 <?php }else {?>
 	 	<tr align="center" valign="middle">
-	 	<td height="32" style="vertical-align:middle;"><a href='/pm/detail/index/id/<?php echo $arrone['detailid'];?>'><?php echo $arrone['projectname']?></a></td>
+	 	<td height="32" style="vertical-align:middle;"><a href='/pm/detail/index/id/<?php echo $arrone['detailId'];?>'><?php echo $arrone['projectName']?></a></td>
 	    <td style="vertical-align:middle;"><?php echo $arrone['content']?></td>
-	    <td style="vertical-align:middle;"><?php echo $arrone['username']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['userName']?></td>
 	    <td style="vertical-align:middle;"><?php echo $arrone['percentage']?></td>
 	    <td style="vertical-align:middle;"><?php 
 		    $arrbox = explode("&", $arrone['pathurl']);
@@ -46,8 +46,8 @@
 		    	echo $arrbox[$i]."<br>";
 		    }
 	    ?></td>
-	    <td style="vertical-align:middle;"><?php echo $arrone['starttime']?></td>
-	    <td style="vertical-align:middle;"><?php echo $arrone['endtime']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['startTime']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['endTime']?></td>
 	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
 	    <td style="vertical-align:middle;"><?php echo $arrone['assess']?></td>
 	    <td style="vertical-align:middle;"><?php if($this->sid == 0){?><a href='/pm/individual/edit/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
