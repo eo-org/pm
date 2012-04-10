@@ -1,5 +1,5 @@
 <?php
-class Pm_View_Helper_Extension extends Zend_Controller_Action_Helper_Abstract
+class Admin_View_Helper_Extension extends Zend_Controller_Action_Helper_Abstract
 {
 	public function extension($extName)
 	{

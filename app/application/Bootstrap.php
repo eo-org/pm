@@ -21,6 +21,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	protected function _initSession()
 	{
 		Zend_Session::start();
+		Class_Server::config(APP_ENV);
 	}
 	
     protected function _initController()
