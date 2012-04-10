@@ -1,0 +1,129 @@
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>部门详情表</div><br>
+<div style="width:48%;font-size:16px;border:1px solid #000;float:left;margin-left:1%;vertical-align:middle;"><br>
+	<table id='user' border="0" cellpadding="0" cellspacing="0" width="100%">
+	  <tr>
+	    <td height="35" align="center" width="50%">部门名称</td>
+	    <td align="center" width="25%">人数</td>
+	    <td align="center">操作</td>
+	  </tr>
+	  <?php foreach ($this->row as $num => $arrone){?>
+	  <tr id="department" class="tr<?php echo $arrone['id'];?>">
+	    <td id="users" height="35" align="center" style="color:<?php if($num==0){echo "#F00";}else{echo "#333";}?>;" class="<?php echo $arrone['id'];?>"><?php echo $arrone['skillName']?></td>
+	    <td id="num" align="center"><?php echo $arrone['num']?></td>
+	    <td align="center"><a class='editdepar' id="<?php echo $arrone['id'];?>" href=''>修改</a>
+	    &nbsp;&nbsp;<a class='deldepar' id="<?php echo $arrone['id'];?>" href=''>删除</a></td>
+	  </tr>
+	  <?php }?>
+	</table>
+	<table id="add" width="50%" style="font-size:16px;" >
+	  <tr>
+	    <td align="center"><div id="adddepar"></div></td>
+	  </tr>
+	  <tr>
+	  	<td align="center"><a id ="depor" href="#">添加步骤</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id ="submitpor" href="#">确定</a>&nbsp;&nbsp;</td>
+	  </tr>
+ 	 </table>
+ 	 <br>
+</div>
+<div id='usersinformation' style="width:45%;float:left;margin-left:1%">
+<?php echo $this->usersinformation;?>
+</div> 
+<script type="text/javascript">
+var i=0;
+var attrValue="";
+$('#user #department #users').live('click',function(){
+	var id = $(this).attr('class');
+	$('#user #department #users').attr('style','color:#333');
+	$('#user #department .'+id).attr('style','color:#F00');
+	$.ajax({
+		type: "GET",
+		url: '/pm/department/uf/id/'+id,
+		success: function(obj) {
+			$('#usersinformation').html(obj);
+		}
+	});
+});
+$('#user #department .editdepar').live('click',function(){
+	var id = $(this).attr('id');
+	var skillname = $(".tr"+id+" #users").text();
+	var num = $(".tr"+id+" #num").text();
+	var aa = "<td align='center' height='35' class='"+id+"' id='users'><input type='text' name='skillname' id='skillname' value='"+skillname+"' /></td><td id='num' align='center'>"+num+"</td><td align='center'>";
+		aa+= "<a id='"+id+"' class='editsubmit' href=''>确定</a>&nbsp;&nbsp;<a id='"+id+"' class='editreturn' href=''>返回</a></td>";
+	$("#user .tr"+id).html(aa);
+	return false;
+});
+$('#user #department .deldepar').live('click',function(){
+	var id = $(this).attr('id');
+	if(!confirm("您删除该部门吗?")){    
+        return false;
+    }else{
+		$.ajax({
+			type: "GET",
+			url: '/pm/department/del/id/'+id,
+			success: function(obj) {
+				$("#user .tr"+id).remove();
+			}
+		});
+    }
+	return false;
+});
+$('#user #department .editsubmit').live('click',function(){
+	var id = $(this).attr('id');
+	var skillname = $("#user .tr"+id+' #skillname').val();
+	var num = $(".tr"+id+" #num").text();
+	if(skillname == ''){alert("部门名称不能为空！");return false;}
+	$.ajax({
+		type: "GET",
+		url: '/pm/department/edit/id/'+id+'/skillname/'+skillname,
+		success: function(obj) {
+			if(obj.result == 'success') {
+				alert("对不起，修改没有成功！");					
+			}else{
+				var aa = "<td align='center' height='35' class='"+id+"' id='users'>"+skillname+"</td><td id='num' align='center'>"+num+"</td>";
+				aa+= "<td align='center'><a class='editdepar' id='"+id+"' href=''>修改</a>&nbsp;&nbsp;<a class='deldepar' id='"+id+"' href=''>删除</a></td>";
+				$("#user .tr"+id).html(aa);
+			}
+		}
+	});
+	return false;
+});
+$('#user #department .editreturn').live('click',function(){
+	var id = $(this).attr('id');
+	$.ajax({
+		type: "POST",
+		url: '/pm/department/sel/id/'+id,
+		success: function(obj) {
+			$("#user .tr"+id).html(obj);
+		}
+	});
+	return false;
+});
+$('#add #depor').click(function(){
+	i++;
+	var aa="<tr id=s"+i+" align='center'><td  colspan='2'><input type='text' value=''/>&nbsp;";
+	aa+= "<input id='deloption' type='button' value='删除' class=s"+i+"></td><td height='32'>&nbsp;</td></tr>";
+	$("#add #adddepar").append(unescape(aa));
+	return false;
+});
+$('#add #submitpor').click(function(){
+	$("#adddepar :input:text").each(function(){
+		var value = $(this).attr("value");
+		attrValue+= value + ':';
+	});
+	$.ajax({
+		type: "POST",
+		url: '/pm/department/add/val/'+attrValue,
+		success: function(obj) {
+			$("#user").append(obj);
+		}
+	});
+	var aa='';
+	$("#add #adddepar").html(aa);
+	return false;
+});
+$('#deloption').live("click",function(){
+	var s = $(this).attr("class");
+	$("#"+s).remove();
+});
+</script>
