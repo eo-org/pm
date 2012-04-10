@@ -39,7 +39,8 @@ class Pm_DepartmentController extends Zend_Controller_Action
 		$selector = $this->_tb->select(false)->setIntegrityCheck(false)
 							  ->from(array('s' => 'skill'))
 							  ->joinLeft(array('i' => 'users_information'),"s.userid = i.id",array('username'))
-							  ->where('s.skillid = ?',$sid);
+							  ->where('s.skillid = ?',$sid)
+							  ->where('i.state = ?',1);
 		$rowskill = $this->_tb->fetchAll($selector)->toArray();
 		$this->view->rowskill = $rowskill;
 		$formmenu = $this->view->render('department/uf.phtml');
@@ -60,7 +61,7 @@ class Pm_DepartmentController extends Zend_Controller_Action
 							  ->where('i.id = ?',$id);
 		$row = $this->_tb->fetchRow($selector)->toArray();
 		$aa ="<td align='center' height='35' class='".$id."' id='users'>".$row['skillname']."</td><td id='num' align='center'>".$row['num']."</td>";
-		$aa.="<td align='center'><a class='editdepar' id='".$id."' href=''>修改</a></td></td>";
+		$aa.="<td align='center'><a class='editdepar' id='".$id."' href=''>修改</a>&nbsp;&nbsp;<a class='deldepar' id='".$id."' href=''>删除</a></td>";
 		echo $aa;
 		exit;
 	}
@@ -76,13 +77,12 @@ class Pm_DepartmentController extends Zend_Controller_Action
 				);
 				$id = $this->_tb->insert($arrin);
 				$aa ="<td align='center' height='35' class='".$id."' id='users'>".$arrbox[$i]."</td><td id='num' align='center'>0</td>";
-				$aa.="<td align='center'><a class='editdepar' id='".$id."' href=''>修改</a></td></td>";
+				$aa.="<td align='center'><a class='editdepar' id='".$id."' href=''>修改</a>&nbsp;&nbsp;<a class='deldepar' id='".$id."' href=''>删除</a></td>";
 			}
 		}
 		echo $aa;
 		exit;
-	}
-	
+	}	
 	
 	public function editAction()
 	{
@@ -95,4 +95,14 @@ class Pm_DepartmentController extends Zend_Controller_Action
 		$this->_tb->update($arrup,$where);
 	}
 	
+	public function delAction()
+	{
+		$id = $this->getRequest()->getParam('id');
+		$where = "id = ".$id;
+		$this->_tb->delete($where);
+		$tb = Class_Base::_('Skill');
+		$where = "skillid = ".$id;
+		$tb->delete($where);
+		exit;
+	}
 }

@@ -1,0 +1,37 @@
+<form action="" method="post">
+<div id='title'>福网互联科技有限公司</div><br>
+<div id='table'>任务委托流程</div><br>
+<table width="95%" height="240" border="0" cellpadding="0" cellspacing="0" style="font-size:16px">
+  <tr>
+    <td width="50%" height="35" align="right">项目名称：</td>
+    <td><?php echo $this->project;?></td>
+  </tr>
+  <tr>
+    <td height="35" align="right">步骤名称：</td>
+    <td><?php echo $this->content;?></td>
+  </tr>
+  <tr>
+    <td height="35" align="right">经理确认：</td>
+    <td><select name="personname" id="personname">
+    	<?php foreach ($this->userrow as $num => $arrone){?>
+      		<option value="<?php echo $arrone['id'];?>"><?php echo $arrone['username']?></option>
+      	<?php }?>
+   		</select></td>
+  </tr>
+  <tr>
+    <td height="35" align="right">委托人员：</td>
+    <td><select name="userid" id="userid">
+    	<?php foreach ($this->rowset as $num => $arrtwo){?>
+      		<option value="<?php echo $arrtwo['userid'];?>"><?php echo $arrtwo['username']?></option>
+      	<?php }?>
+   		</select></td>
+  </tr>
+  <tr>
+    <td height="35" align="right" style="vertical-align:top;">委托原因：</td>
+    <td><textarea name="reason" id="reason" cols="30" rows="3" style='width:300px;height:50px;'></textarea></td>
+  </tr>
+  <tr>
+    <td height="35" colspan="2" align='center'><input type="submit" name="button" id="button" value="提交" />
+    &nbsp;&nbsp;<input type="button" name="button2" id="button2" value="返回" onclick="javascript:history.go(-1);" /></td>
+  </tr>
+</table>

@@ -1,7 +1,8 @@
+<div>
 <?php $row = $this->row;?>
 <div id='title'>福网互联科技有限公司</div><br>
 <div id='table'>员工详情表</div><br>
-<div id='user' style="width:60%;font-size:16px;border:1px solid #000;float:left;margin-left:1%"><br>
+<div id='user' style="width:60%;height:220px;font-size:16px;border:1px solid #000;float:left;margin-left:1%"><br>
 <table id="users"  border="0" cellpadding="0" cellspacing="0">
   <tr valign="middle">
     <td width="10%" height="35" align="center">姓名</td>
@@ -12,7 +13,7 @@
     <td width="16%" align="center">操作</td>
   </tr>
   <?php foreach ($row as $num => $arrone){?>
-  <tr align="center" valign="middle" id="information" >
+  <tr align="center" valign="middle" id="information" class='<?php echo $arrone['id'];?>' >
     <td height="44" id="userid" style="color:<?php if($num==0){echo "#F00";}else{echo "#333";}?>;" class="<?php echo $arrone['id'];?>"><?php echo $arrone['username']?></td>
     <td><?php if($arrone['sex']==1){echo '男';}else{echo '女';}?></td>
     <td><?php echo $arrone['age']?></td>
@@ -23,13 +24,18 @@
     &nbsp;&nbsp;<a class='deluser' id="<?php echo $arrone['id'];?>" href=''>辞职</a></td>
   </tr>
   <?php }?>
+  <tr>
+  	<td colspan='6' align='center'><?php echo $this->pageshow;?></td>
+  </tr>
 </table>
+<br>
 </div>
 <div id='detailstep' style="width:35%;float:left;margin-left:1%">
 <?php echo $this->seldetail;?>
 </div> 
+</div>
 <script type="text/javascript">
-$('#users #userid').click(function(){
+$('#users #userid').live("click",function(){
 	var uid = $(this).attr('class');
 	$("#users #information #userid").attr('style','color:#333');
 	$("#users #information ."+uid).attr('style','color:#F00');

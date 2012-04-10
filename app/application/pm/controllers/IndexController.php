@@ -42,4 +42,22 @@ class Pm_IndexController extends Zend_Controller_Action
 		//$this->_hepler->redirector->gotoSimple('index','index','pm');
 		$this->_redirect('/pm/index/index');
 	}
+	
+	public function selpwdAction()
+	{
+		$oldpwd = $this->getRequest()->getParam('oldpwd');
+		$selector = $this->_tb->select(false)
+							  ->from($this->_tb, '*')
+							  ->where('username = ?',$_SESSION['USERID']);
+		$rowset = $this->_tb->fetchRow($selector);
+		if(!empty($rowset)){
+			$rowset = $rowset->toArray();
+			if($oldpwd == $rowset['passwd']){
+				echo 1;
+			}else{
+				echo 0;
+			}
+		}else{echo 0;}
+		exit;
+	}
 }

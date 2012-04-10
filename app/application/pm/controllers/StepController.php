@@ -24,7 +24,8 @@ class Pm_StepController extends Zend_Controller_Action
 		$selector = $this->_tb->select(false)->setIntegrityCheck(false)
 						 ->from(array('t'=>'step'),array('id','content','percentage','pathurl','starttime','endtime','assess','state'))
 						 ->joinLeft(array('u'=>'users_information'),"t.programmer = u.id ", array('username'))
-						 ->joinLeft(array('d'=>'detail'),"t.detailid = d.id",array('id as deid','projectname'))
+						 ->joinLeft(array('e' => 'entrust'),"t.id = e.stepid and e.state = 1",array('e.id as entrustid','e.userid'))
+						 ->joinLeft(array('i' => 'users_information'),"e.userid = i.id",array('i.username as entrustname'))
 						 ->where('t.detailid = ?',$id);
 		$row = $this->_tb->fetchAll($selector)->toArray();
 		$tb = Class_Base::_('Skill_Information');
@@ -103,6 +104,9 @@ class Pm_StepController extends Zend_Controller_Action
 		$id = $this->getRequest()->getParam('id');
 		$where = 'id = '.$id;
 		$row = $this->_tb->delete($where);
+		$tb = Class_Base::_('Entrust');
+		$where = "stepid = ".$id;
+		$tb->delete($where);
 		$this->_redirect('/pm/step/index/id/'.$deid);
 	}
 }

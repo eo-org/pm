@@ -1,0 +1,42 @@
+<?php $arrone = $this->row;?>
+<form action="" method="post">
+<table width="600px" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="37%" height="40" align="right">是否通过：</td>
+    <td width="63%"><select name="state" id="state">
+      <option value='1' <?php if($arrone['state']==1){echo "selected='selected'";}?>>通过</option>
+      <option value='0' <?php if($arrone['state']==0){echo "selected='selected'";}?>>审核中</option>
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td height="40" align="right">项目名称：</td>
+    <td><?php echo $arrone['projectname'];?></td>
+  </tr>
+  <tr>
+    <td height="40" align="right">步骤名称：</td>
+    <td><?php echo $arrone['content'];?></td>
+  </tr>
+  <tr>
+    <td height="40" align="right">申请人：</td>
+    <td><?php echo $arrone['enname'];?></td>
+  </tr>
+  <tr>
+    <td height="40" align="right">委托人：</td>
+    <td><select name="userid" id="userid">
+    	<?php foreach($this->userrow as $num => $arrtwo){?>
+      		<option value='<?php echo $arrtwo['userid'];?>' <?php if($arrone['userid']==$arrtwo['userid']){echo "selected='selected'";}?>><?php echo $arrtwo['username'];?></option>
+      	<?php }?>
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td height="40" align="right">委托原因：</td>
+    <td><?php echo $arrone['reason'];?></td>
+  </tr>
+  <tr>
+    <td height="40" colspan="2" align="center"><input type="submit" name="button" id="button" value="确定" />
+    <input type="button" name="button2" id="button2" value="返回" onclick="javascript:history.go(-1);"/></td>
+  </tr>
+</table>
+</form>

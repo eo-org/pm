@@ -1,30 +1,46 @@
 <?php
 require CONTAINER_PATH.'/app/application/pm/forms/Individual/Edit.php';
+require CONTAINER_PATH.'/app/application/pm/forms/Page.php';
 class Pm_IndividualController extends Zend_Controller_Action
 {
 	private $_schedule;
 	private $_Digits;
+	private $_pagelist;
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
 			$this->_redirect('/pm/index/');
 		}
 		$this->_Digits = new Zend_Filter_Digits();
+		$this->_pagelist = new Form_Page();
 	}
 	public function indexAction()
 	{	
+		$pagesize = 8;
 		$sid = $this->_Digits->filter($this->getRequest()->getParam('sid'),0);
+		$page = $this->_Digits->filter($this->getRequest()->getParam('page'),0);
 		if($sid == 0){
 			$this->_helper->template->head('未完成任务列表');
 		}else{
 			$this->_helper->template->head('完成任务列表');
 		}
 		$tb = Class_Base::_('Step');
+		$sql = $tb->select(false)
+				  ->from($tb,array('count(*) as num'))
+				  ->where('programmer = ?',$_SESSION['USERID'])
+				  ->where('state = ?',$sid);
+		$rowset = $tb->fetchRow($sql)->toArray();
+		$ys = $rowset['num'];
 		$selector = $tb->select(false)->setIntegrityCheck(false)
 					   ->from(array('s' => 'step'), '*')
+					   ->joinLeft(array('i' => 'users_information'),"s.programmer = i.id",array('i.username'))
 					   ->joinLeft(array('d' => 'detail'),"s.detailid = d.id", array('projectname'))
-					   ->where('s.programmer = ?',$_SESSION['USERID'])
-					   ->where('s.state = ?',$sid);
+					   ->joinLeft(array('e' => 'entrust'),"s.id = e.stepid and e.state = 1",array('e.id as entrustid','e.userid'))
+					   ->joinLeft(array('u' => 'users_information'),"e.userid = u.id",array('u.username as entrustname'))
+					   ->where('s.programmer = ? or e.userid  = ?',$_SESSION['USERID'])
+					   ->where('s.state = ?',$sid)
+					   //->orwhere('e.userid = ?',$_SESSION['USERID'])
+					   ->limitPage($page, $pagesize);
 		$rowset = $tb->fetchAll($selector)->toArray();
 		$this->view->sid = $sid;
 		$this->view->rowset = $rowset;
@@ -32,6 +48,7 @@ class Pm_IndividualController extends Zend_Controller_Action
 				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
 				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
 				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
+		$this->view->pageshow = $this->_pagelist->getPage($page,$ys,"/pm/individual/index/sid/".$sid,$pagesize);
 	}
 	
 	public function selAction()
@@ -150,4 +167,23 @@ class Pm_IndividualController extends Zend_Controller_Action
 			$skill->insert($arrin);
 		}
 	}
+	
+	public function editpwdAction()
+	{
+		if($this->getRequest()->isPost()){
+			$newpwd = $this->getRequest()->getParam('newpwd');
+			$tb = Class_Base::_('Users');
+			$arrup = array(
+				'passwd' => $newpwd
+			);
+			$where = "username = ".$_SESSION['USERID'];
+			$tb->update($arrup, $where);
+			$this->_redirect('/pm/individual/sel/');
+		}
+		$this->_helper->template->actionMenu(array(
+				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
+	}
+	
 }

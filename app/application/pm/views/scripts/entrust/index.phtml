@@ -1,0 +1,31 @@
+<table width="95%" border="0" cellspacing="0" cellpadding="0" style="font-size:16px;">
+  <tr>
+    <td width="12%" height="40" align="center" style="vertical-align:middle;">时间</td>
+    <td width="12%" align="center" style="vertical-align:middle;">申请人</td>
+    <td width="12%" align="center" style="vertical-align:middle;">项目</td>
+    <td width="12%" align="center" style="vertical-align:middle;">步骤</td>
+    <td width="15%" align="center" style="vertical-align:middle;">委托人</td>
+    <td width="19%" align="center" style="vertical-align:middle;">备注</td>
+    <td width="9%" align="center" style="vertical-align:middle;">是否通过</td>
+    <td width="12%" align="center" style="vertical-align:middle;">操作</td>
+  </tr>
+  <?php foreach ($this->row as $num => $arrone){?>
+  <tr>
+    <td align="center" style="vertical-align:middle;" height="40"><?php echo $arrone['detime'];?></td>
+    <td align="center" style="vertical-align:middle;"><?php echo $arrone['enname'];?></td>
+    <td align="center" style="vertical-align:middle;"><?php echo $arrone['projectname'];?></td>
+    <td align="center" style="vertical-align:middle;"><?php echo $arrone['content'];?></td>
+    <td align="center" style="vertical-align:middle;"><?php echo $arrone['benname'];?></td>
+    <td align="center" style="vertical-align:middle;"><?php echo $arrone['reason'];?></td>
+    <td align="center" style="vertical-align:middle;"><?php if($arrone['state']==1){echo '通过';}else{echo '审核中';}?></td>
+    <td align="center" style="vertical-align:middle;"><?php if($arrone['state']!=1){?>
+    	<a href='/pm/entrust/edit/id/<?php echo $arrone['id'];?>'>编辑</a>
+    	<a href='/pm/entrust/del/id/<?php echo $arrone['id'];?>'>删除</a>
+    	<?php }?>
+    </td>
+  </tr>
+  <?php }?>
+  <tr>
+    <td height="40" colspan="7" align="center">&nbsp;</td>
+  </tr>
+</table>

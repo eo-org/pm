@@ -40,30 +40,53 @@
   </tr>
   <?php if(empty($this->row)){echo "<tr><td height='32' align='center'>暂无步骤，请添加！</td><td colspan='3'>&nbsp;</td></tr>";}else{?>
   <?php foreach ($this->row as $num => $arrone){?>
-  <tr align="center" valign="middle">
-    <td height="32"><?php echo $arrone['content']?></td>
-    <td><?php echo $arrone['username']?></td>
-    <td><?php echo $arrone['percentage']?></td>
-    <td><?php 
-	    $arrbox = explode("&", $arrone['pathurl']);
-	    for($i=0;$i<count($arrbox);$i++){
-	    	echo $arrbox[$i]."<br>";
-	    }
-    ?></td>
-    <td><?php echo $arrone['starttime']?></td>
-    <td><?php echo $arrone['endtime']?></td>
-    <td><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
-    <td><?php echo $arrone['assess']?></td>
-    <td><a href='/pm/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
-    &nbsp;<a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
-    &nbsp;<a href='/pm/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a></td>
-  </tr>
-  <?php }}?>
+	  <?php if($arrone['entrustid']!=''){ ?>
+		   <tr align="center" >
+		    <td style="vertical-align:middle;" height="32"><?php echo $arrone['content'];?></td>
+		    <td style="vertical-align:middle;"><?php echo $arrone['username'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['percentage'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php 
+			    $arrbox = explode("&", $arrone['pathurl']);
+			    for($i=0;$i<count($arrbox);$i++){
+			    	echo $arrbox[$i]."<br>";
+			    }
+		    ?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['starttime'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['endtime'];?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['assess']?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){?><a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
+		    &nbsp;<a href='/pm/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a><?php }?></td>
+		  </tr>
+		  <tr align="center" >
+		    <td height="32" style="color:#f00;vertical-align:middle;">┗━委托☞</td>
+		    <td style="vertical-align:middle;"><?php echo $arrone['entrustname'];?></td>
+		  </tr>
+	 <?php }else {?>
+	 	<tr align="center" valign="middle">
+	    <td height="32" style="vertical-align:middle;"><?php echo $arrone['content']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['username']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['percentage']?></td>
+	    <td style="vertical-align:middle;"><?php 
+		    $arrbox = explode("&", $arrone['pathurl']);
+		    for($i=0;$i<count($arrbox);$i++){
+		    	echo $arrbox[$i]."<br>";
+		    }
+	    ?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['starttime']?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['endtime']?></td>
+	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
+	    <td style="vertical-align:middle;"><?php echo $arrone['assess']?></td>
+	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){?><a href='/pm/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
+	    &nbsp;<a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
+	    &nbsp;<a href='/pm/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a><?php }?></td>
+	  </tr>
+  <?php }}}?>
   </table>
   <input id="detailid" type="hidden" value="<?php echo $this->deid;?>">
   <table id="add" width="15%" style="font-size:16px;" >
 	  <tr align="right">
-	  	<td><a id ="addstep" href="#">添加步骤</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id ="submitstep">确定</a>&nbsp;&nbsp;</td>
+	  	<td><a id ="addstep" href="#">添加步骤</a>&nbsp;&nbsp;&nbsp;&nbsp;<a id ="submitstep" href=''>确定</a>&nbsp;&nbsp;</td>
 	  </tr>
   </table>
 <script type="text/javascript">

@@ -22,12 +22,12 @@ class Pm_FeedbackController extends Zend_Controller_Action
 				array('label' => '项目步骤', 'href' => '/pm/step/index/id/'.$id, 'method' => 'detailstep'),
 				array('label' => '反馈意见', 'href' => '/pm/feedback/index/id/'.$id, 'method' => 'feedback'),
 				array('label' => '反馈意见添加', 'href' => '/pm/feedback/create/id/'.$id, 'method' => 'Createfeedback')));
-		if(!empty($row)){
+		if(!isset($row)){
 			$row = $row->toArray();
 			$this->view->projectname = $row[0]['projectname'];
 			$this->view->deid = $row[0]['deid'];
-			$this->view->row = $row;	
 		}
+		$this->view->row = $row;
 	}
 	
 	public function createAction()

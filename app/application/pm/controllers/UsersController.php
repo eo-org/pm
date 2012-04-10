@@ -1,24 +1,34 @@
 <?php
 require CONTAINER_PATH.'/app/application/pm/forms/Users/Edit.php';
 require CONTAINER_PATH.'/app/application/pm/forms/Users/User.php';
+require CONTAINER_PATH.'/app/application/pm/forms/Page.php';
 class Pm_UsersController extends Zend_Controller_Action
 {
 	private $_tb;
 	private $uid;
+	private $_pagelist;
 	public function init()
 	{
 		if(!isset($_SESSION['USERNAME'])){
 			$this->_redirect('/pm/index/');
 		}
 		$this->_tb = Class_Base::_('Users_Information');
+		$this->_pagelist = new Form_Page();
 	}
 	public function indexAction()
 	{	
+		$pagesize = 3;
+		$page = $this->getRequest()->getParam('page');
 		$this->_helper->template->head('员工详情列表');
 		$selector = $this->_tb->select(false)
 							  ->from($this->_tb,'*')
-							  ->where('state = ?',1);
+							  ->where('state = ?',1)
+							  ->limitPage($page, $pagesize);
 		$row = $this->_tb->fetchAll($selector)->toArray();
+		$sql = $this->_tb->select(false)
+						 ->from($this->_tb,array('count(*) as num'))
+						 ->where('state = ?',1);
+		$rowset = $this->_tb->fetchRow($sql)->toArray();
 		$this->view->row = $row;
 		$this->uid = $row[0]['id'];
 		$this->view->seldetail = $this->seldetailAction();
@@ -26,6 +36,7 @@ class Pm_UsersController extends Zend_Controller_Action
 				array('label' => '员工详情管理', 'href' => '/pm/users/index/', 'method' => 'ManagementDetail'),
 				array('label' => '员工添加', 'href' => '/pm/users/create/', 'method' => 'CreateDetail'),
 				array('label' => '部门管理', 'href' => '/pm/department/index/', 'method' => 'CreateDetail')));
+		$this->view->pageshow = $this->_pagelist->getPage($page,$rowset['num'],"/pm/users/index",$pagesize);
 	}
 	
 	public function createAction()
@@ -70,17 +81,21 @@ class Pm_UsersController extends Zend_Controller_Action
 		}
 		$step = Class_Base::_('Step');
 		$selector = $step->select(false)->setIntegrityCheck(false)
-						 ->from(array('s' => 'step'))
-						 ->joinLeft(array('d' => 'detail'),"s.detailid = d.id ",array('id','projectname'))
-						 ->where('programmer = ?',$uid)
+						 ->from(array('s' => 'step'),array('content'))
+						 ->joinLeft(array('d' => 'detail'),"s.detailid = d.id ",array('d.id','d.projectname'))
+						 ->joinLeft(array('e' => 'entrust'),"s.id = e.stepid and e.state = 1",array('state'))
+						 ->where('programmer = ? or e.userid  = ?',$uid)
 						 ->group('detailid');
 		$rowdetail = $step->fetchAll($selector)->toArray();
 		if($rowdetail){
 			$this->view->rowdetail = $rowdetail;
 			$detailid = $rowdetail[0]['id'];
-			$sql = $step->select(false)
-						->from($step,array('id','content','state'))
-						->where('programmer = ?',$uid)
+			$sql = $step->select(false)->setIntegrityCheck(false)
+						->from(array('s' => 'step'),array('id','content','state'))
+						->joinLeft(array('e' => 'entrust'),"s.id = e.stepid and e.state = 1",array('e.id as entrustid','e.userid'))
+						->joinLeft(array('u' => 'users_information'),"e.userid = u.id",array('username'))
+						->joinLeft(array('i' => 'users_information'),"e.entrustname = i.id",array('username as busername'))
+						->where('programmer = ? or e.userid  = ?',$uid)
 						->where('detailid = ?',$detailid);
 			$rowstep = $step->fetchAll($sql)->toArray();
 			$if = 1;
@@ -103,15 +118,26 @@ class Pm_UsersController extends Zend_Controller_Action
 		$did = $this->getRequest()->getParam('did');
 		$uid = $this->getRequest()->getParam('uid');
 		$step = Class_Base::_('Step');
-		$selector = $step->select(false)
-						 ->from($step,array('id','content','state'))
-						 ->where('detailid = ?',$did)
-						 ->where('programmer =?',$uid);
+		$selector = $step->select(false)->setIntegrityCheck(false)
+						->from(array('s' => 'step'),array('id','content','state'))
+						->joinLeft(array('e' => 'entrust'),"s.id = e.stepid and e.state = 1",array('entrustname','e.userid'))
+						->joinLeft(array('u' => 'users_information'),"e.userid = u.id",array('username'))
+						->joinLeft(array('i' => 'users_information'),"e.entrustname = i.id",array('username as busername'))
+						->where('programmer = ? or e.userid  = ?',$uid)
+						->where('detailid = ?',$did);
 		$row = $step->fetchAll($selector)->toArray();
+		//Zend_Debug::dump($row);
 		$i =1;
 		$selstep = "";
 		foreach ($row as $num => $arrone){
 			$selstep.= "<li id=".$arrone['id'].">".$i."、".$arrone['content']."(";
+			if($arrone['userid']!=''){
+				if($uid == $arrone['userid']){
+					$selstep.='被'.$arrone['busername'].'委托、';
+				}else {
+					$selstep.='委托给'.$arrone['username'].'、';
+				}
+			}
 			if($arrone['state'] == 0){
 				$selstep.='未完成';
 			}else {
@@ -208,6 +234,9 @@ class Pm_UsersController extends Zend_Controller_Action
 		$this->_tb->update($date,$where);
 		$where = 'username = '.$id;
 		$tb = Class_Base::_('Users');
+		$tb->delete($where);
+		$tbskill = Class_Base::_('Skill');
+		$where = 'userid = '.$id;
 		$tb->delete($where);
 		$this->_redirect('/pm/users/index/');
 	}
