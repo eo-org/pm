@@ -71,11 +71,7 @@ $request = Zend_Controller_Front::getInstance()->getRequest();
 		</div>
 		
 		<div class='control'>
-			<?php
-			$actionMenu = App_Brick_Controller::createFixedBrick('Admin_ActionMenu');
-			$actionMenu->setMenu($this->actionMenu);
-			echo $actionMenu->render();
-			?>
+			<?php echo $this->extension('ActionMenu', $this->actionMenu) ?>
 		</div>
 		
 		<div class='flash-message'>
