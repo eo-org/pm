@@ -4,9 +4,6 @@ class Admin_EntrustController extends Zend_Controller_Action
 	private $_tb;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_tb = Class_Base::_('Entrust');
 	}
 	public function indexAction()
@@ -58,7 +55,7 @@ class Admin_EntrustController extends Zend_Controller_Action
 					'reason' => $reason
 					);
 			$this->_tb->insert($arrin);
-			$this->_redirect('/pm/individual/index/sid/0');
+			$this->_redirect('/admin/individual/index/sid/0');
 		}
 		$this->view->id=$id;
 		$this->view->project = $row['projectName'];
@@ -66,9 +63,9 @@ class Admin_EntrustController extends Zend_Controller_Action
 		$this->view->userrow = $userrow;
 		$this->view->rowset  = $rowset;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
-				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
-				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
+				array('label' => '未完成任务', 'href' => '/admin/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/admin/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/admin/individual/sel/', 'method' => 'CreateDetail')));
 	}
 	
 	public function editAction()
@@ -98,7 +95,7 @@ class Admin_EntrustController extends Zend_Controller_Action
 	    			);
 	    	$where = 'id = '.$id;
 	    	$this->_tb->update($arrup,$where);
-	    	$this->_redirect('/pm/entrust/index');
+	    	$this->_redirect('/admin/entrust/index');
 		}
 		$this->view->id= $id;
 		$this->view->row = $row;
@@ -111,6 +108,6 @@ class Admin_EntrustController extends Zend_Controller_Action
 		$id = $this->getRequest()->getParam('id');
 		$where = 'id = '.$id;
 		$row = $this->_tb->delete($where);
-		$this->_redirect('/pm/feedback/index/id/'.$deid);
+		$this->_redirect('/admin/feedback/index/id/'.$deid);
 	}
 }

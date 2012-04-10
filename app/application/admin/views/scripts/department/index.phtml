@@ -38,7 +38,7 @@ $('#user #department #users').live('click',function(){
 	$('#user #department .'+id).attr('style','color:#F00');
 	$.ajax({
 		type: "GET",
-		url: '/pm/department/uf/id/'+id,
+		url: '/admin/department/uf/id/'+id,
 		success: function(obj) {
 			$('#usersinformation').html(obj);
 		}
@@ -60,7 +60,7 @@ $('#user #department .deldepar').live('click',function(){
     }else{
 		$.ajax({
 			type: "GET",
-			url: '/pm/department/del/id/'+id,
+			url: '/admin/department/del/id/'+id,
 			success: function(obj) {
 				$("#user .tr"+id).remove();
 			}
@@ -75,7 +75,7 @@ $('#user #department .editsubmit').live('click',function(){
 	if(skillname == ''){alert("部门名称不能为空！");return false;}
 	$.ajax({
 		type: "GET",
-		url: '/pm/department/edit/id/'+id+'/skillname/'+skillname,
+		url: '/admin/department/edit/id/'+id+'/skillname/'+skillname,
 		success: function(obj) {
 			if(obj.result == 'success') {
 				alert("对不起，修改没有成功！");					
@@ -92,7 +92,7 @@ $('#user #department .editreturn').live('click',function(){
 	var id = $(this).attr('id');
 	$.ajax({
 		type: "POST",
-		url: '/pm/department/sel/id/'+id,
+		url: '/admin/department/sel/id/'+id,
 		success: function(obj) {
 			$("#user .tr"+id).html(obj);
 		}
@@ -113,7 +113,7 @@ $('#add #submitpor').click(function(){
 	});
 	$.ajax({
 		type: "POST",
-		url: '/pm/department/add/val/'+attrValue,
+		url: '/admin/department/add/val/'+attrValue,
 		success: function(obj) {
 			$("#user").append(obj);
 		}

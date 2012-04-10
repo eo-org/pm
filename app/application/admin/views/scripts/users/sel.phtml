@@ -21,7 +21,7 @@
 		<?php $selstep = $j."、".$arrone['content'].'(';
 			if($arrone['userId']!=''){
 				if($this->uid == $arrone['userId']){
-					$selstep.='被'.$arrone['buserName'].'委托、';
+					$selstep.='被'.$arrone['busername'].'委托、';
 				}else {
 					$selstep.='委托给'.$arrone['userName'].'、';
 				}
@@ -47,7 +47,7 @@ $('#seldetail .detail').click(function(){
 	$("#detail #seldetail #"+did).attr('class','font');
 	$.ajax({
 		type: "GET",
-		url: '/pm/users/selstep/did/'+did+'/uid/<?php echo $this->uid;?>',
+		url: '/admin/users/selstep/did/'+did+'/uid/<?php echo $this->uid;?>',
 		success: function(obj) {
 			$('#step #selstep').html(obj);
 		}

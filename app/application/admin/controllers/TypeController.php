@@ -6,9 +6,6 @@ class Admin_TypeController extends Zend_Controller_Action
 	private $_form;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_form = new Form_Type_Edit();
 		$this->_tb = Class_Base::_('Detail_Type');
 	}
@@ -29,14 +26,14 @@ class Admin_TypeController extends Zend_Controller_Action
 						'id' => null,
 						'desc' => null
 				),
-				'url' => '/pm/type/get-form-json/',
+				'url' => '/admin/type/get-form-json/',
 				'actionId' => 'id',
 				'click' => array(
 						'action' => 'contextMenu',
 						'menuItems' => array(
-								array('详情', '/pm/tschedule/index/id/'),
-								array('编辑', '/pm/type/edit/id/'),
-								array('删除', '/pm/type/del/id/')
+								array('详情', '/admin/tschedule/index/id/'),
+								array('编辑', '/admin/type/edit/id/'),
+								array('删除', '/admin/type/del/id/')
 						)
 				),
 				'initSelectRun' => 'true',
@@ -44,8 +41,8 @@ class Admin_TypeController extends Zend_Controller_Action
 		));	
 		$this->view->partialHTML = $partialHTML;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目类型管理', 'href' => '/pm/type/index/', 'method' => 'ManagementType'),
-				array('label' => '类型添加', 'href' => '/pm/type/create/', 'method' => 'CreateType')));
+				array('label' => '项目类型管理', 'href' => '/admin/type/index/', 'method' => 'ManagementType'),
+				array('label' => '类型添加', 'href' => '/admin/type/create/', 'method' => 'CreateType')));
 	}
 	
 	public function createAction()
@@ -53,7 +50,7 @@ class Admin_TypeController extends Zend_Controller_Action
 		$form = $this->_form;
 		if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getParams())) {
 			$type = $this->_tb->insert($form->getValues());
-			$this->_redirect('/pm/type/add/id/'.$type);
+			$this->_redirect('/admin/type/add/id/'.$type);
 		}
 		$this->view->form = $form;
 	}
@@ -133,7 +130,7 @@ class Admin_TypeController extends Zend_Controller_Action
         	$arrone = $html->getValues();
         	$where = "id = ".$id;
         	$this->_tb->update($arrone, $where);
-			$this->_redirect('/pm/type/index/');
+			$this->_redirect('/admin/type/index/');
 		}	
 		$this->view->html = $html;
 	}
@@ -143,6 +140,6 @@ class Admin_TypeController extends Zend_Controller_Action
 		$id = $this->getRequest()->getParam('id');
 		$where = 'id = '.$id;
 		$row = $this->_tb->delete($where);
-		$this->_redirect('/pm/type/index/');
+		$this->_redirect('/admin/type/index/');
 	}
 }

@@ -8,9 +8,6 @@ class Admin_IndividualController extends Zend_Controller_Action
 	private $_pagelist;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_Digits = new Zend_Filter_Digits();
 		$this->_pagelist = new Form_Page();
 	}
@@ -45,10 +42,10 @@ class Admin_IndividualController extends Zend_Controller_Action
 		$this->view->sid = $sid;
 		$this->view->rowset = $rowset;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
-				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
-				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
-		$this->view->pageshow = $this->_pagelist->getPage($page,$ys,"/pm/individual/index/sid/".$sid,$pagesize);
+				array('label' => '未完成任务', 'href' => '/admin/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/admin/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/admin/individual/sel/', 'method' => 'CreateDetail')));
+		$this->view->pageshow = $this->_pagelist->getPage($page,$ys,"/admin/individual/index/sid/".$sid,$pagesize);
 	}
 	
 	public function selAction()
@@ -70,9 +67,9 @@ class Admin_IndividualController extends Zend_Controller_Action
 		$this->view->row = $row;
 		$this->view->rowset = $rowstep;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
-				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
-				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
+				array('label' => '未完成任务', 'href' => '/admin/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/admin/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/admin/individual/sel/', 'method' => 'CreateDetail')));
 	}
 	
 	public function getFormJsonAction()
@@ -131,7 +128,7 @@ class Admin_IndividualController extends Zend_Controller_Action
 		if($this->getRequest()->isPost() && $html->isValid($this->getRequest()->getParams()) ) {
         	$row->setFromArray($html->getValues());
 			$row->save();
-			$this->_redirect('/pm/individual/index/');
+			$this->_redirect('/admin/individual/index/');
 		}
 		$this->view->html = $html;
 	}
@@ -178,12 +175,12 @@ class Admin_IndividualController extends Zend_Controller_Action
 			);
 			$where = "userName = ".$_SESSION['USERID'];
 			$tb->update($arrup, $where);
-			$this->_redirect('/pm/individual/sel/');
+			$this->_redirect('/admin/individual/sel/');
 		}
 		$this->_helper->template->actionMenu(array(
-				array('label' => '未完成任务', 'href' => '/pm/individual/index/sid/0', 'method' => 'ManagementDetail'),
-				array('label' => '完成任务', 'href' => '/pm/individual/index/sid/1', 'method' => 'ManagementDetail'),
-				array('label' => '个人信息', 'href' => '/pm/individual/sel/', 'method' => 'CreateDetail')));
+				array('label' => '未完成任务', 'href' => '/admin/individual/index/sid/0', 'method' => 'ManagementDetail'),
+				array('label' => '完成任务', 'href' => '/admin/individual/index/sid/1', 'method' => 'ManagementDetail'),
+				array('label' => '个人信息', 'href' => '/admin/individual/sel/', 'method' => 'CreateDetail')));
 	}
 	
 }

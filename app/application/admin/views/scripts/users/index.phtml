@@ -19,7 +19,7 @@
     <td><?php echo $arrone['age']?></td>
     <td><?php echo $arrone['QQ']?></td>
     <td><?php echo $arrone['phone']?></td>
-    <td><a href='/pm/users/edit/id/<?php echo $arrone['id'];?>'>修改</a>
+    <td><a href='/admin/users/edit/id/<?php echo $arrone['id'];?>'>修改</a>
     &nbsp;&nbsp;<a class='resetpwd' id="<?php echo $arrone['id'];?>" href=''>重置密码</a>
     &nbsp;&nbsp;<a class='deluser' id="<?php echo $arrone['id'];?>" href=''>辞职</a></td>
   </tr>
@@ -41,7 +41,7 @@ $('#users #userid').live("click",function(){
 	$("#users #information ."+uid).attr('style','color:#F00');
 	$.ajax({
 		type: "GET",
-		url: '/pm/users/seldetail/id/'+uid,
+		url: '/admin/users/seldetail/id/'+uid,
 		success: function(obj) {
 			$('#detailstep').html(obj);
 		}
@@ -54,7 +54,7 @@ $('.resetpwd').click(function(){
     }else{
     	$.ajax({
     		type: "GET",
-    		url: '/pm/users/resetpwd/id/'+uid,
+    		url: '/admin/users/resetpwd/id/'+uid,
     		success: function(obj) {	
     		}
     	});
@@ -68,7 +68,7 @@ $('.deluser').click(function(){
     }else{
     	$.ajax({
     		type: "GET",
-    		url: '/pm/users/deluser/id/'+uid,
+    		url: '/admin/users/deluser/id/'+uid,
     		success: function(obj) {	
     			$("#users ."+uid).remove();
     		}

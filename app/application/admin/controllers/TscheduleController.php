@@ -4,9 +4,6 @@ class Admin_TscheduleController extends Zend_Controller_Action
 	private $_tb;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_tb = Class_Base::_('Typestep');
 	}
 	public function indexAction()
@@ -30,8 +27,7 @@ class Admin_TscheduleController extends Zend_Controller_Action
 		$this->view->row = $row;
 		$this->view->deid = $id;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目类型管理', 'href' => '/pm/type/index/', 'method' => 'ManagementDetail'),
-				array('label' => '类型添加', 'href' => '/pm/type/create/', 'method' => 'ManagementDetail')));
+				array('label' => '类型添加', 'href' => '/admin/type/create/', 'method' => 'ManagementDetail')));
 	}
 	
 	public function createAction()
@@ -79,7 +75,7 @@ class Admin_TscheduleController extends Zend_Controller_Action
 							  ->where('s.id = ?',$id);
 		$row = $this->_tb->fetchRow($selector)->toArray();	
 		$html = "<td id='typestep'>".$row['typestep']."</td><td class='".$row['skillId']."' id='skillname'>".$row['skillName']."</td>";
-		$html.= "<td><a class='".$row['id']."' href='#' id='editstep'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/pm/tschedule/del/deid/".$deid."/id/".$row['id']."'>删除</a></td>";
+		$html.= "<td><a class='".$row['id']."' href='#' id='editstep'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/admin/tschedule/del/deid/".$deid."/id/".$row['id']."'>删除</a></td>";
 		echo $html;
 		exit;	
 	}
@@ -90,6 +86,6 @@ class Admin_TscheduleController extends Zend_Controller_Action
 		$id = $this->getRequest()->getParam('id');
 		$where = 'id = '.$id;
 		$row = $this->_tb->delete($where);
-		$this->_redirect('/pm/tschedule/index/id/'.$deid);
+		$this->_redirect('/admin/tschedule/index/id/'.$deid);
 	}
 }

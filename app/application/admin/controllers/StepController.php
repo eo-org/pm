@@ -6,9 +6,6 @@ class Admin_StepController extends Zend_Controller_Action
 	private $_tb;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_tb = Class_Base::_('Step');
 	}
 	public function indexAction()
@@ -38,9 +35,9 @@ class Admin_StepController extends Zend_Controller_Action
 		$this->view->deid = $id;
 		$this->_helper->template->head('项目步骤详情列表');
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目详情管理', 'href' => '/pm/detail/index/', 'method' => 'ManagementDetail'),
-				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail'),
-				array('label' => '反馈意见', 'href' => '/pm/feedback/index/id/'.$id, 'method' => 'CreateDetail')));
+				array('label' => '项目详情管理', 'href' => '/admin/detail/index/', 'method' => 'ManagementDetail'),
+				array('label' => '项目添加', 'href' => '/admin/detail/create/', 'method' => 'CreateDetail'),
+				array('label' => '反馈意见', 'href' => '/admin/feedback/index/id/'.$id, 'method' => 'CreateDetail')));
 	}
 	
 	public function distributionAction()
@@ -54,7 +51,7 @@ class Admin_StepController extends Zend_Controller_Action
 			$arrone = $form->getValues();
 			$where = "id = ".$id;
 			$this->_tb->update($arrone, $where);
-			$this->_redirect('/pm/step/index/id/'.$arrrow['detailid']);
+			$this->_redirect('/admin/step/index/id/'.$arrrow['detailid']);
 		}
 		$this->view->form = $form;
 	}
@@ -93,7 +90,7 @@ class Admin_StepController extends Zend_Controller_Action
 	        $arrone = $form->getValues();
 	        $where = "id = ".$id;
 	        $this->_tb->update($arrone, $where);
-	        $this->_redirect('/pm/step/index/id/'.$deid);
+	        $this->_redirect('/admin/step/index/id/'.$deid);
 		}
 		$this->view->html = $html;
 	}
@@ -107,6 +104,6 @@ class Admin_StepController extends Zend_Controller_Action
 		$tb = Class_Base::_('Entrust');
 		$where = "stepId = ".$id;
 		$tb->delete($where);
-		$this->_redirect('/pm/step/index/id/'.$deid);
+		$this->_redirect('/admin/step/index/id/'.$deid);
 	}
 }

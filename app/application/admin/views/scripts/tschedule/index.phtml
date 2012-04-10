@@ -15,7 +15,7 @@
     <td id="typestep"><?php echo $arrone['typeStep'];?></td>
     <td id="skillname" class="<?php echo $arrone['skillId'];?>"><?php echo $arrone['skillName'];?></td>
     <td><a id="editstep" href="#" class="<?php echo $arrone['id'];?>">修改</a>&nbsp;&nbsp;
-    &nbsp;&nbsp;<a href="/pm/tschedule/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>">删除</a></td>
+    &nbsp;&nbsp;<a href="/admin/tschedule/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>">删除</a></td>
   </tr>
   <?php }}?>
   </table>
@@ -36,15 +36,15 @@ $('#editsubmit').live("click",function(){
 	var skillname = $('#tr'+id+' #skillid').find('option:selected').text();
 	var ajax = $.ajax({
 		type: "POST",
-		url: '/pm/tschedule/edit/id/'+id+'/typestep/'+typestep+'/skillid/'+skillid,
+		url: '/admin/tschedule/edit/id/'+id+'/typestep/'+typestep+'/skillid/'+skillid,
 		success: function(obj) {
 			if(obj.result == 'success') {
 				alert("对不起，修改没有成功！");
-				window.location.href='/pm/tschedule/index/id/<?php echo $this->deid;?>';					
+				window.location.href='/admin/tschedule/index/id/<?php echo $this->deid;?>';					
 			}else{
 				var aa = "<td id='typestep'>"+typestep+"</td><td class='"+skillid+"' id='skillname'>"+skillname+"</td>";
 				aa+="<td><a class='"+id+"' href='#' id='editstep'>修改</a>&nbsp;&nbsp;";
-				aa+="&nbsp;&nbsp;<a href='/pm/tschedule/del/deid/11/id/7'>删除</a></td>";
+				aa+="&nbsp;&nbsp;<a href='/admin/tschedule/del/deid/11/id/7'>删除</a></td>";
 				$("#tr"+id).html(aa);
 			}
 		}
@@ -73,7 +73,7 @@ $('#editreturn').live("click",function(){
 	var id = $(this).attr('class');
 	$.ajax({
 		type: "POST",
-		url: '/pm/tschedule/sel/id/'+id+'/deid/<?php echo $this->deid;?>',
+		url: '/admin/tschedule/sel/id/'+id+'/deid/<?php echo $this->deid;?>',
 		success: function(obj) {
 			$("#tr"+id).html(obj);
 		}
@@ -107,12 +107,12 @@ $('#submitstep').click(function(){
 		selvalue+=id+':';		
 	});
 	var id = $("#detailid").val();
-	purl = "/pm/tschedule/create/id/"+id+"/val/"+attrValue+"/selval/"+selvalue;
+	purl = "/admin/tschedule/create/id/"+id+"/val/"+attrValue+"/selval/"+selvalue;
 	var aj = $.ajax({
 		type: "POST",
 		url: purl,
 		success: function(obj) {
-			window.location.href='/pm/tschedule/index/id/'+id;			
+			window.location.href='/admin/tschedule/index/id/'+id;			
 		}
 	});
 });

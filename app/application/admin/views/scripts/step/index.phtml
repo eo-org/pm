@@ -25,8 +25,8 @@
   	<td><?php echo $this->detailrow['testUrl'];?></td>
   	<td><?php echo $this->detailrow['domain'];?></td>
   	<td><?php echo $this->detailrow['state'];?></td>
-  	<td><a href='/pm/detail/edit/id/<?php echo $this->detailrow['id'];?>'>编辑</a>
-  	&nbsp;&nbsp;<a href='/pm/detail/del/id/<?php echo $this->detailrow['id'];?>'>删除</a></td>
+  	<td><a href='/admin/detail/edit/id/<?php echo $this->detailrow['id'];?>'>编辑</a>
+  	&nbsp;&nbsp;<a href='/admin/detail/del/id/<?php echo $this->detailrow['id'];?>'>删除</a></td>
   </tr>
   <tr align="center"><td height="30" colspan="9"></td></tr>
   <tr align="center" valign="middle">
@@ -57,8 +57,8 @@
 		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['endTime'];?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
 		    <td style="vertical-align:middle;" rowspan="2"><?php echo $arrone['assess']?></td>
-		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){?><a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
-		    &nbsp;<a href='/pm/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a><?php }?></td>
+		    <td style="vertical-align:middle;" rowspan="2"><?php if($arrone['state'] == 0){?><a href='/admin/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
+		    &nbsp;<a href='/admin/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a><?php }?></td>
 		  </tr>
 		  <tr align="center" >
 		    <td height="32" style="color:#f00;vertical-align:middle;">┗━委托☞</td>
@@ -79,9 +79,9 @@
 	    <td style="vertical-align:middle;"><?php echo $arrone['endTime']?></td>
 	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){echo '进行中';}else{echo '完成';}?></td>
 	    <td style="vertical-align:middle;"><?php echo $arrone['assess']?></td>
-	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){?><a href='/pm/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
-	    &nbsp;<a href='/pm/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
-	    &nbsp;<a href='/pm/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a><?php }?></td>
+	    <td style="vertical-align:middle;"><?php if($arrone['state'] == 0){?><a href='/admin/step/distribution/id/<?php echo $arrone['id'];?>'>分发任务</a>&nbsp;
+	    &nbsp;<a href='/admin/step/edit/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>编辑</a>&nbsp;
+	    &nbsp;<a href='/admin/step/del/deid/<?php echo $this->deid;?>/id/<?php echo $arrone['id'];?>'>删除</a><?php }?></td>
 	  </tr>
   <?php }}}?>
   </table>
@@ -126,9 +126,9 @@ $('#submitstep').click(function(){
 	var id = $("#detailid").val();
 	var aj = $.ajax({
 		type: "POST",
-		url: '/pm/step/create/id/'+id+'/val/'+attrValue+'/selval/'+selvalue,
+		url: '/admin/step/create/id/'+id+'/val/'+attrValue+'/selval/'+selvalue,
 		success: function(obj) {	
-			window.location.href='/pm/step/index/id/'+id;	
+			window.location.href='/admin/step/index/id/'+id;	
 		}
 	});
 });

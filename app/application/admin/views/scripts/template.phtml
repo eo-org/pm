@@ -19,18 +19,16 @@ $request = Zend_Controller_Front::getInstance()->getRequest();
 </head>
 
 <body>
-	<?php if(isset($_SESSION['USERNAME'])){?>
-	<div id="navigation">
-		<div id="menu_login">欢迎您<?php echo $_SESSION['USERNAME'];?>登录！&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/pm/individual/index/'>个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/pm/detail/index/'>项目详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/pm/type/index/'>类型详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/pm/users/index/'>员工管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/pm/entrust/index/'>委托流程管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href='/pm/index/close/'>退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	<div id="navigation" style="width: 100%">
+		<div id="menu_login">欢迎您<?php //echo $_SESSION['USERNAME'];?>登录！&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/admin/individual/index/'>个人中心</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/admin/detail/index/'>项目详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/admin/type/index/'>类型详情管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/admin/users/index/'>员工管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/admin/entrust/index/'>委托流程管理</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href='/admin/index/close/'>退出</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 	</div>
-	<?php }?>
 	<div class='admin_main_frame'>
 		<?php
 		if(false) {
@@ -98,14 +96,7 @@ $request = Zend_Controller_Front::getInstance()->getRequest();
 	</div>
 	<!-- *********************lightbox divs below this line*********************  -->
 	<div id='lightbox-blackbox'></div>
-	<div id='lightbox-whitebox'>
-		<div class='closer'></div>
-		<div class='content'></div>
-	</div>
-	<div class="finderbox">
-		<div class='closer'>CLOSE</div>
-		<div class='content'></div>
-	</div>
+	
 	<div style="height:120px;width:100%; border-top: 3px solid #AAAAAA;float:left; margin-top:20px;" ></div>
 </body>
 </html>

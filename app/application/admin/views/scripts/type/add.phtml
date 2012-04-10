@@ -38,17 +38,17 @@ $('#button').click(function(){
 		selvalue+=id+':';		
 	});
 	var id = $("#typeid").val();
-	purl = '/pm/type/add/id/'+id+'/val/'+attrValue+'/selval/'+selvalue;
+	purl = '/admin/type/add/id/'+id+'/val/'+attrValue+'/selval/'+selvalue;
 	var aj = $.ajax({
 		type: "POST",
 		url: purl,
 		success: function(obj) {
-			window.location.href='/pm/type/index';			
+			window.location.href='/admin/type/index';			
 		}
 	});
 });
 $('#button2').click(function(){
-	window.location.href='/pm/type/index';
+	window.location.href='/admin/type/index';
 });
 
 </script>

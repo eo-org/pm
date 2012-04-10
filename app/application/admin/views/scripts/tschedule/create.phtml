@@ -26,12 +26,12 @@ $('#button').click(function(){
 		attrValue+= value + ':';
 	});
 	var id = $("#detailid").val();
-	purl = '/pm/tschedule/create/id/'+id+'/val/'+attrValue;
+	purl = '/admin/tschedule/create/id/'+id+'/val/'+attrValue;
 	var aj = $.ajax({
 		type: "POST",
 		url: purl,
 		success: function(obj) {
-			window.location.href='/pm/tschedule/index/id/'+id;			
+			window.location.href='/admin/tschedule/index/id/'+id;			
 		}
 	});
 });

@@ -1,14 +1,11 @@
 <?php
-require CONTAINER_PATH.'/app/application/pm/forms/Detail/Edit.php';
+require CONTAINER_PATH.'/app/application/admin/forms/Detail/Edit.php';
 class Admin_DepartmentController extends Zend_Controller_Action
 {
 	private $_tb;
 	private $sid;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_tb = Class_Base::_('Skill_Information');
 	}
 	public function indexAction()
@@ -25,7 +22,7 @@ class Admin_DepartmentController extends Zend_Controller_Action
 		$this->view->row = $row;
 		$this->view->usersinformation = $this->ufAction();
 		$this->_helper->template->actionMenu(array(
-				array('label' => '部门添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail')));
+				array('label' => '部门添加', 'href' => '/admin/detail/create/', 'method' => 'CreateDetail')));
 	}
 	
 	public function ufAction()

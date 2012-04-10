@@ -1,13 +1,12 @@
 <?php
-require CONTAINER_PATH.'/app/application/pm/forms/Detail/Edit.php';
+require CONTAINER_PATH.'/app/application/admin/forms/Detail/Edit.php';
 class Admin_DetailController extends Zend_Controller_Action
 {
 	private $_tb;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
+		//$csu = Class_Session_User::getInstance();
+		//$csu->getUserId();
 		$this->_tb = Class_Base::_('Detail');
 	}
 	public function indexAction()
@@ -22,9 +21,9 @@ class Admin_DetailController extends Zend_Controller_Action
 		}
 		$id = $this->getRequest()->getParam('id');
 		if(empty($id)){
-			$pathurl = "/pm/detail/get-form-json/";
+			$pathurl = "/admin/detail/get-form-json/";
 		}else{
-			$pathurl = '/pm/detail/get-form-json/id/'.$id;
+			$pathurl = '/admin/detail/get-form-json/id/'.$id;
 		}
 		$this->_helper->template->head('项目详情列表');
 		$hashParam = $this->getRequest()->getParam('hashParam');
@@ -52,7 +51,7 @@ class Admin_DetailController extends Zend_Controller_Action
 				'click' => array(
 						'action' => 'contextMenu',
 						'menuItems' => array(
-								array('详情','/pm/step/index/id/')
+								array('详情','/admin/step/index/id/')
 						)
 				),
 				'initSelectRun' => 'true',
@@ -61,7 +60,7 @@ class Admin_DetailController extends Zend_Controller_Action
 		$this->view->type = $type;
 		$this->view->partialHTML = $partialHTML;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目添加', 'href' => '/pm/detail/create/', 'method' => 'CreateDetail')));
+				array('label' => '项目添加', 'href' => '/admin/detail/create/', 'method' => 'CreateDetail')));
 	}
 	
 	public function createAction()
@@ -84,7 +83,7 @@ class Admin_DetailController extends Zend_Controller_Action
 				$step = Class_Base::_('Step');
 				$step->insert($arrin);
 			}
-			$this->_redirect('/pm/detail/index/');
+			$this->_redirect('/admin/detail/index/');
 		}
 		$this->view->html = $form;
 	}
@@ -173,11 +172,11 @@ class Admin_DetailController extends Zend_Controller_Action
 		if($this->getRequest()->isPost() && $html->isValid($this->getRequest()->getParams()) ) {
         	$row->setFromArray($html->getValues());
 			$row->save();
-			$this->_redirect('/pm/detail/index/');
+			$this->_redirect('/admin/detail/index/');
 		}
 		$this->view->html = $html;
 		$this->_helper->template->actionMenu(array(
-				array('label' => '项目删除', 'href' => '/pm/detail/del/id/'.$id, 'method' => 'DelDetail')));
+				array('label' => '项目删除', 'href' => '/admin/detail/del/id/'.$id, 'method' => 'DelDetail')));
 	}
 	
 	public function delAction()
@@ -188,6 +187,6 @@ class Admin_DetailController extends Zend_Controller_Action
 		$schedule = Class_Base::_('Step');
 		$where = 'detailId = '.$id;
 		$schedule->delete($where);
-		$this->_redirect('/pm/detail/index/');
+		$this->_redirect('/admin/detail/index/');
 	}
 }

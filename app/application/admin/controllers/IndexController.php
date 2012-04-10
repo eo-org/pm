@@ -28,8 +28,8 @@ class Admin_IndexController extends Zend_Controller_Action
 				$_SESSION['USERID'] = $rowset['userName'];
 				$_SESSION['USERNAME'] = $row['userName'];
 				$_SESSION['PERMISSIONS'] = $rowset['permissions'];
-				//$this->_helper->redirector->gotoSimple('/pm/detail/index');
-				$this->_redirect('/pm/detail/index');
+				//$this->_helper->redirector->gotoSimple('/admin/detail/index');
+				$this->_redirect('/admin/detail/index');
 			}
 			$this->view->errorMsg = "用户名或密码错误";
 		}
@@ -40,7 +40,7 @@ class Admin_IndexController extends Zend_Controller_Action
 	{
 		session_destroy();
 		//$this->_hepler->redirector->gotoSimple('index','index','pm');
-		$this->_redirect('/pm/index/index');
+		$this->_redirect('/admin/index/index');
 	}
 	
 	public function selpwdAction()

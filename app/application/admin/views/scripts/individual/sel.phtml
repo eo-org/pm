@@ -34,7 +34,7 @@
   <tr>
     <td height="42" colspan="4" align="center" id="operating">
     	<input type="button" name="button" id="editinformation" value="修改信息" />
-      	<input type="button" name="button" id="editpassword" value="修改密码" onClick="window.location='/pm/individual/editpwd/'" />
+      	<input type="button" name="button" id="editpassword" value="修改密码" onClick="window.location='/admin/individual/editpwd/'" />
     </td>
   </tr>
 </table>
@@ -106,9 +106,9 @@ $(document).ready(function() {
 		if(skillid.length==""){alert('部门不能为空！'); }   
 		$.ajax({
 			type: "POST",
-			url: '/pm/individual/edituser/username/'+username+'/sex/'+sex+'/age/'+age+'/QQ/'+QQ+'/phone/'+phone+'/skillid/'+skillid,
+			url: '/admin/individual/edituser/username/'+username+'/sex/'+sex+'/age/'+age+'/QQ/'+QQ+'/phone/'+phone+'/skillid/'+skillid,
 			success: function(obj) {
-				window.location.href='/pm/individual/sel/';			
+				window.location.href='/admin/individual/sel/';			
 			}
 		});
 	});

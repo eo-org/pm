@@ -13,7 +13,7 @@ $(document).ready(function() {
 		}else{
 			$.ajax({
 				type: "POST",
-				url: '/pm/users/selusername/uname/'+uname,
+				url: '/admin/users/selusername/uname/'+uname,
 				success: function(obj) {	
 					$("#username-element #nametsy").html(unescape(obj));				
 				}
@@ -26,7 +26,7 @@ $(document).ready(function() {
 		if(readonly != "readonly"){
 			$.ajax({
 				type: "POST",
-				url: '/pm/users/selusername/uname/'+uname,
+				url: '/admin/users/selusername/uname/'+uname,
 				success: function(obj) {	
 					$("#username-element #nametsy").html(unescape(obj));				
 				}

@@ -19,8 +19,8 @@
     <td align="center" style="vertical-align:middle;"><?php echo $arrone['reason'];?></td>
     <td align="center" style="vertical-align:middle;"><?php if($arrone['state']==1){echo '通过';}else{echo '审核中';}?></td>
     <td align="center" style="vertical-align:middle;"><?php if($arrone['state']!=1){?>
-    	<a href='/pm/entrust/edit/id/<?php echo $arrone['id'];?>'>编辑</a>
-    	<a href='/pm/entrust/del/id/<?php echo $arrone['id'];?>'>删除</a>
+    	<a href='/admin/entrust/edit/id/<?php echo $arrone['id'];?>'>编辑</a>
+    	<a href='/admin/entrust/del/id/<?php echo $arrone['id'];?>'>删除</a>
     	<?php }?>
     </td>
   </tr>

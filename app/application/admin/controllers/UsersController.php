@@ -9,9 +9,6 @@ class Admin_UsersController extends Zend_Controller_Action
 	private $_pagelist;
 	public function init()
 	{
-		if(!isset($_SESSION['USERNAME'])){
-			$this->_redirect('/admin/index/');
-		}
 		$this->_tb = Class_Base::_('Users_Information');
 		$this->_pagelist = new Form_Page();
 	}
@@ -33,10 +30,10 @@ class Admin_UsersController extends Zend_Controller_Action
 		$this->uid = $row[0]['id'];
 		$this->view->seldetail = $this->seldetailAction();
 		$this->_helper->template->actionMenu(array(
-				array('label' => '员工详情管理', 'href' => '/pm/users/index/', 'method' => 'ManagementDetail'),
-				array('label' => '员工添加', 'href' => '/pm/users/create/', 'method' => 'CreateDetail'),
-				array('label' => '部门管理', 'href' => '/pm/department/index/', 'method' => 'CreateDetail')));
-		$this->view->pageshow = $this->_pagelist->getPage($page,$rowset['num'],"/pm/users/index",$pagesize);
+				array('label' => '员工详情管理', 'href' => '/admin/users/index/', 'method' => 'ManagementDetail'),
+				array('label' => '员工添加', 'href' => '/admin/users/create/', 'method' => 'CreateDetail'),
+				array('label' => '部门管理', 'href' => '/admin/department/index/', 'method' => 'CreateDetail')));
+		$this->view->pageshow = $this->_pagelist->getPage($page,$rowset['num'],"/admin/users/index",$pagesize);
 	}
 	
 	public function createAction()
@@ -66,7 +63,7 @@ class Admin_UsersController extends Zend_Controller_Action
 					);
 			$tb_users = Class_Base::_('Users');
 			$tb_users->insert($arrthree);
-			$this->_redirect('/pm/users/index/');
+			$this->_redirect('/admin/users/index/');
 		}
 		$this->view->html = $form;
 	}
@@ -92,7 +89,7 @@ class Admin_UsersController extends Zend_Controller_Action
 			$detailid = $rowdetail[0]['id'];
 			$sql = $step->select(false)->setIntegrityCheck(false)
 						->from(array('s' => 'step'),array('id','content','state'))
-						->joinLeft(array('e' => 'entrust'),"s.id = e.stepId and e.state = 1",array('e.id as entrustid','e.userid'))
+						->joinLeft(array('e' => 'entrust'),"s.id = e.stepId and e.state = 1",array('e.id as entrustid','e.userId'))
 						->joinLeft(array('u' => 'users_information'),"e.userId = u.id",array('userName'))
 						->joinLeft(array('i' => 'users_information'),"e.entrustName = i.id",array('userName as busername'))
 						->where('programmer = ? or e.userId  = ?',$uid)
@@ -131,7 +128,7 @@ class Admin_UsersController extends Zend_Controller_Action
 		$selstep = "";
 		foreach ($row as $num => $arrone){
 			$selstep.= "<li id=".$arrone['id'].">".$i."、".$arrone['content']."(";
-			if($arrone['userid']!=''){
+			if($arrone['userId']!=''){
 				if($uid == $arrone['userId']){
 					$selstep.='被'.$arrone['buserName'].'委托、';
 				}else {
@@ -188,7 +185,7 @@ class Admin_UsersController extends Zend_Controller_Action
 			$tb_users = Class_Base::_('Users');
 			$where = 'userName = '.$id;
 			$tb_users->update($arrthree, $where);
-			$this->_redirect('/pm/users/index/');
+			$this->_redirect('/admin/users/index/');
 		}
 		$this->view->html = $html;
 	}
@@ -238,6 +235,6 @@ class Admin_UsersController extends Zend_Controller_Action
 		$tbskill = Class_Base::_('Skill');
 		$where = 'userId = '.$id;
 		$tb->delete($where);
-		$this->_redirect('/pm/users/index/');
+		$this->_redirect('/admin/users/index/');
 	}
 }
